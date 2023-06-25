@@ -53,7 +53,6 @@ int do_calculus(char **av)
             ;
     }
     printf("Your result is %d.\n", result);
-    return result;
 }
 
 int main(int ac, char **av)
@@ -70,5 +69,6 @@ int main(int ac, char **av)
     if (valid_number(av[3]) == false)
         return 84 + (printf("[Error] Invalid number 2.\n") * 0);
 
-    return do_calculus(av);
+    do_calculus(av);
+    return 0;
 }
