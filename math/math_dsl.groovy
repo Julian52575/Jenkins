@@ -2,6 +2,8 @@
 job('Compiling the maths') {
 
     environmentVariables(NAME: 'Julian')
+    
+    description(readFileFromWorkspace('acme-tests', 'math/JOB_DESCRIPTION.TXT.txt'))
 
     steps {
         shell( 'test Makefile' )
