@@ -1,0 +1,136 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          description: "C'est moi !"
+          id: "42"
+          password: "{AQAAABAAAAAQbwdUGsbI51v8V9V5o909Ak/I/SvCcLVRdn3m6hgAlg8=}"
+          scope: GLOBAL
+          username: "Julian52575"
+      - usernamePassword:
+          description: "C'est Archi !"
+          id: "84"
+          password: "{AQAAABAAAAAQFHvhiFw0rwsv9tCGt2fE9kCm5PQGEI+ldp5U91f/gvY=}"
+          scope: GLOBAL
+          username: "Archi"
+      - basicSSHUserPrivateKey:
+          id: "ba865430-6624-464e-a38e-b34c7a54ba62"
+          privateKeySource:
+            directEntry:
+              privateKey: "{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}"
+          scope: GLOBAL
+          username: "jenkins"
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy: "loggedInUsersCanDoAnything"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "RETURN_ERROR"
+        value: "1"
+      - key: "RETURN_SUCESS"
+        value: "0"
+  labelAtoms:
+  - name: "built-in"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 2
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "admin"
+        name: "admin"
+        properties:
+        - "apiToken"
+        - "mailer"
+        - "favorite"
+        - "myView"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+        - "experimentalFlags"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  gitHooks:
+    allowedOnAgents: false
+    allowedOnController: false
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+unclassified:
+  bitbucketEndpointConfiguration:
+    endpoints:
+    - bitbucketCloudEndpoint:
+        enableCache: false
+        manageHooks: false
+        repositoriesCacheDuration: 0
+        teamCacheDuration: 0
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    hookUrl: "http://localhost:8080/github-webhook/"
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "julian.bottiglione@epitech.eu"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+  scmGit:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    hideCredentials: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
