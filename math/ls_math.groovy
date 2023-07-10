@@ -1,7 +1,7 @@
 
-job('LS') {
+job('wrong sign') {
 
     steps {
-        shell( 'ls' )
+        shell( './math . 3 3' )
     }
 }
