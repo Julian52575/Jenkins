@@ -1,11 +1,4 @@
 
-job('LS') {
-
-    steps {
-        shell( 'ls' )
-    }
-}
-
 job('Compiling the maths') {
 
     environmentVariables(EXE: 'math')
