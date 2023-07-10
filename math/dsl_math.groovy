@@ -24,6 +24,5 @@ job( 'Testing the maths' ) {
         shell( './math % 9 9 >> log' )
 
         shell( 'diff ./log ./math_results ' )
-        shell( 'rm log' )
     }
 }
