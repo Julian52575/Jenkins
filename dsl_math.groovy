@@ -3,7 +3,7 @@ job('Compiling the maths') {
 
     environmentVariables(EXE: 'math')
     
-    description( readFileFromWorkspace( 'math/JOB_DESCRIPTION.TXT' ) )
+    description( readFileFromWorkspace( 'JOB_DESCRIPTION.TXT' ) )
 
     steps {
         shell( 'test Makefile' )
