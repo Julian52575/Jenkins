@@ -1,4 +1,5 @@
 def call(Map config = [:] ) {
+    sh 'ls'
     sh 'test Makefile'
     sh 'make'
     sh 'test -x ${config.binary_name}'
