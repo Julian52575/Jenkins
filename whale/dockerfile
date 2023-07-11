@@ -17,3 +17,5 @@ RUN apt-get install -y make && apt-get install -y gcc
 
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+RUN jenkins-plugin-cli --plugins "clone-workspace-scm"
+RUN jenkins-plugin-cli --plugins "groovy"
