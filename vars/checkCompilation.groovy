@@ -1,4 +1,5 @@
 def call(Map config = [:] ) {
+    sh "echo "Hello world" "
     sh "echo "Testing Compilation of ${config.name}" "
     sh 'ls'
     sh 'test Makefile'
