@@ -35,14 +35,8 @@ then
     if [ $HAS_SOCKET_ACCESS -ne 0 ]; then
         echo "WARNING: Socket access is denied"
         echo "To fix this we will add the current user to docker group with : sudo usermod -a -G docker $USER"
-        read -p "Do you want to proceed? (yes/no) " yn
-        case $yn in 
-            yes | Y | y | Yes | YES) echo "ok, we will proceed";
-                sudo usermod -a -G docker $USER;
-                echo "You must reboot your computer for the changes to take effect";;
-            no | N | n | No | NO) echo "ok, Skipping";;
-            * ) echo "invalid response, Skipping";;
-        esac
+        sudo usermod -a -G docker $USER;
+        echo "You must reboot your computer for the changes to take effect";;
         BASE_EXEC_CMD="sudo ${BASE_EXEC_CMD}"
     fi
 
