@@ -1,6 +1,21 @@
 def call(Map config = [:] ) {
-    loadScript(name: "my-coding.sh")
-    sh "./my-coding.sh . ."
-    sh "test -x coding-style-reports.log"
+    def dockerImage = "ghcr.io/epitech/coding-style-checker:latest"
+
+    agent {
+        docker {
+            image dockerImage
+            args ". ."
+        }
+    }
+
+    return 2
 }
-//readFile
+
+
+
+//load docker image + container
+//run coding style & bind report
+//count how much error
+//
+//
+//send report to Email
