@@ -7,6 +7,10 @@ def call(Map config = [:] ) {
             args ". ."
         }
     }
+    steps {
+        ". ."
+    }
+
 
     return 2
 }
