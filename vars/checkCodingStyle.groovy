@@ -1,7 +1,7 @@
 def call(Map config = [:] ) {
     def dockerImage = "ghcr.io/epitech/coding-style-checker:latest"
 
-    echo "Starting Coding Style"
+    sh 'echo "Starting Coding Style"'
     agent {
         docker {
             image dockerImage
@@ -9,7 +9,7 @@ def call(Map config = [:] ) {
         }
     }
     steps {
-        ". ."
+        sh ". ."
     }
 
 
