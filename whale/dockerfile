@@ -1,10 +1,8 @@
-FROM epitechcontent/epitest-docker
-#jenkins/jenkins:jdk17
-#this image allows us to run DinD unline jdk17
+FROM jenkins/jenkins:2.414.3-jdk17
+#image from the jenkins website
 
 USER root
-RUN dnf install -y jenkins
-RUN dnf install -y lsb-release
+RUN apt-get update && apt-get install -y lsb-release
 
 #Adding the Jenkins automate installation Key to system
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
@@ -18,11 +16,8 @@ RUN echo "deb [arch=$(dpkg --print-architecture) \
 
 #Installing the needed dependensies
 USER root
-#RUN apt-get update         Useless and possible compatibility issues
-RUN dnf install -y sudo
-RUN dnf install -y docker-ce-cli
-RUN dnf install -y docker
-RUN dnf install -y make && apt-get install -y gcc
+#RUN apt-get install -y docker-ce-cli
+RUN apt-get install -y sudo make gcc
 
 #Installing the plugins :
 USER jenkins

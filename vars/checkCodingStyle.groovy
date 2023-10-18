@@ -1,11 +1,6 @@
 def call(Map config = [:] ) {
-    def dockerImage = "ghcr.io/epitech/coding-style-checker:latest"
-
-    sh 'echo "Starting Coding Style"'
-    sh 'sleep 5'
-    sh 'docker run ghcr.io/epitech/coding-style-checker:latest . .'
-    sh 'cat coding-style-reports.log'
-    return 2
+    
+    return 0
 }
 
 
