@@ -1,4 +1,7 @@
 def call(Map config = [:]) {
-    sh "file ${config.name} | grep -q -v 'with debug_info'"
-    return $?    
+    areDebugSymbol = sh (
+        script: "file ${config.name} | grep -q -v 'with debug_info'" 
+        returnStatus: true
+    )
+    return areDebugSymbol
 }
