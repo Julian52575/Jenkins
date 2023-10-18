@@ -3,11 +3,11 @@ def call(Map config = [:] ) {
  
     hasCompiled = sh (
         script: 'test Makefile'
-        returnStatus: true
+        returnStatus: 'true'
     )
     hasCompiled = sh (
         script: 'make'
-        returnStatus: true
+        returnStatus: 'true'
     )
     hasCompiled = sh (
         script: "test -x ${config.name}"
