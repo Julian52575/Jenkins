@@ -1,7 +1,7 @@
 def call(Map config = [:] ) {
     hasCompiled = 0
 
-    sh 'echo -n Compilation:\t'
+    sh 'echo -n Compilation:\t > new_mouli_log.txt'
     hasCompiled = sh (
         script: 'test Makefile',
         returnStatus: true
