@@ -1,5 +1,9 @@
 def call(Map config = [:]) {
-    sh "test Makefile"
+    hasCleaned = sh (
+        script: "test Makefile"
+        returnStatus: true
+    )
+    
     sh "make"
     sh "test ${config.name} "
     sh "make clean"
