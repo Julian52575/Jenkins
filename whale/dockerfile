@@ -17,7 +17,7 @@ RUN echo "deb [arch=$(dpkg --print-architecture) \
 #Installing the needed dependensies
 USER root
 #RUN apt-get install -y docker-ce-cli
-RUN apt-get install -y sudo make gcc
+RUN apt-get install -y sudo make gcc file
 
 #Installing the plugins :
 USER jenkins
