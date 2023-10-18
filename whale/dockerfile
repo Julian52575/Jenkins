@@ -1,0 +1,31 @@
+FROM epitechcontent/epitest-docker
+#jenkins/jenkins:jdk17
+#this image allows us to run DinD unline jdk17
+
+USER root
+RUN dnf install -y jenkins
+RUN dnf install -y lsb-release
+
+#Adding the Jenkins automate installation Key to system
+RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+  https://download.docker.com/linux/debian/gpg
+
+#Add Jenkins APT Repository Entry
+RUN echo "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
+  https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+#Installing the needed dependensies
+USER root
+#RUN apt-get update         Useless and possible compatibility issues
+RUN dnf install -y sudo
+RUN dnf install -y docker-ce-cli
+RUN dnf install -y docker
+RUN dnf install -y make && apt-get install -y gcc
+
+#Installing the plugins :
+USER jenkins
+RUN jenkins-plugin-cli --plugins "clone-workspace-scm"
+RUN jenkins-plugin-cli --plugins "groovy"
+RUN jenkins-plugin-cli --plugins docker-plugin:1.5
