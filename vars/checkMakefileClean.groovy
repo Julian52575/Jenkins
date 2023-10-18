@@ -1,6 +1,6 @@
 def call(Map config = [:]) {
     hasCleaned = sh (
-        script: "test Makefile"
+        script: "test Makefile",
         returnStatus: true
     )
     
