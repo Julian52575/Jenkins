@@ -6,9 +6,11 @@ def call(Map config = [:]) {
     //Logging
     sh 'echo -n "[[[Debug symbol:\t" >> new_mouli_log.txt'
     if ( hasDebugSymbol == "0" ) {
-        sh 'echo -n "OK. No debbuging symbols present in binary." >> new_mouli_log.txt'    
+        printOK()
+        sh 'echo -n "No debbuging symbols present in binary." >> new_mouli_log.txt'    
     } else {
-        sh 'echo -n "KO. Binary has been compiled with debbuging info." >> new_mouli_log.txt'
+        printKO()
+        sh 'echo -n "Binary has been compiled with debbuging info." >> new_mouli_log.txt'
     }
     sh 'echo "\n" >> new_mouli_log.txt'
     //
