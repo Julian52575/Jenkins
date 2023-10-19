@@ -4,7 +4,7 @@ def call(Map config = [:]) {
     hour = "0:01"
 
     sh "echo ${config.name} > new_mouli_log.txt"
-    sh "echo ${config.author} >> new_mouli_log"
+    sh "echo ${config.author} >> new_mouli_log.txt"
     sh "echo ${date} >> new_mouli_log.txt"
     sh "echo ${hour} >> new_mouli_log.txt"
     hasCompiled = checkCompilation( name:"${config.name}" )
