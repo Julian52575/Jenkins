@@ -16,11 +16,11 @@ def call(Map config = [:] ) {
     )
     if ( hasCompiled == "0" ) {
         sh (
-            script: "echo '${config.name} has been correctly compiled !' >> new_mouli_log.txt",
+            script: 'echo "${config.name} has been correctly compiled !" >> new_mouli_log.txt',
             returnStatus: true
         )
     } else {
-        sh "echo K.O No compilado :( >> new_mouli_log.txt"
+        sh 'echo "K.O No compilado :(" >> new_mouli_log.txt'
     }
     return hasCompiled
 }
