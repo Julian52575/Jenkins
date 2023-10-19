@@ -7,7 +7,12 @@ def call(Map config = [:]) {
     sh "echo ${config.author} >> new_mouli_log.txt"
     sh "echo ${date} >> new_mouli_log.txt"
     sh "echo ${hour} >> new_mouli_log.txt"
-    sh 'echo -e "\n\n---\n" >> new_mouli_log.txt'
+    sh 'echo " " >> new_mouli_log.txt'
+    sh 'echo " " >> new_mouli_log.txt'
+
+    sh 'echo "---" >> new_mouli_log.txt'
+    
+    sh 'echo " " >> new_mouli_log.txt'
     hasCompiled = checkCompilation( name:"${config.name}" )
     if ( hasCompiled == 1 ) {
         exit 84
