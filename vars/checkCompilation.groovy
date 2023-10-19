@@ -35,7 +35,7 @@ def call(Map config = [:] ) {
     //LOGGING
     if ( hasCompiled == 0 ) {
         printOK()
-        sh "echo ${config.name} has been compiled succesfully! >> new_mouli_log.txt",
+        sh "echo ${config.name} has been compiled succesfully! >> new_mouli_log.txt"
     }
     return hasCompiled
 }
