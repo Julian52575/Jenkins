@@ -1,5 +1,5 @@
 def call(Map config = [:] ) {
-    hasCompiled = 0
+    hasCompiled = "0"
 
     sh 'echo -n "[[[Compilation: \t" >> new_mouli_log.txt'
     hasCompiled = sh (
@@ -14,7 +14,7 @@ def call(Map config = [:] ) {
         script: "test -x ${config.name}",
         returnStatus: true
     )
-    if ( hasCompiled == 0 ) {
+    if ( hasCompiled == "0" ) {
         sh (
             script: "echo '${config.name} has been correctly compiled !' >> new_mouli_log.txt",
             returnStatus: true
