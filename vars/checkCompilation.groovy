@@ -38,8 +38,6 @@ def call(Map config = [:] ) {
             script: 'echo "${config.name} has been correctly compiled !" >> new_mouli_log.txt',
             returnStatus: true
         )
-    } else {
-        sh 'echo 
     }
     return hasCompiled
 }
