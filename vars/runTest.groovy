@@ -3,7 +3,7 @@ def call(Map config = [:]) {
     //cmd -> ./math 1 1 +
     //expOutput -> Your result is 2.
     //expReturnValue -> 0
-    output = " "
+    def output = " "
 
     //Starting log
     sh "echo -n ${config.name}: >> new_mouli_log.txt"
@@ -24,7 +24,7 @@ def call(Map config = [:]) {
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     //
     //ReturnValue
-    statusCode = sh (
+    def statusCode = sh (
         script: "${config.cmd}",
         returnStatus: true
     )
