@@ -24,12 +24,12 @@ def call(Map config = [:]) {
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     //
     //ReturnValue
-    output = sh (
+    statusCode = sh (
         script: "${config.cmd}",
         returnStatus: true
     )
-    sh 'echo "Debug returnValue _${output}_" '
-    if ( output == config.expReturnValue ) {
+    sh 'echo "Debug returnValue _${statusCode}_" '
+    if ( statusCode == config.expReturnValue ) {
         printOK()
     } else {
         printKO()
