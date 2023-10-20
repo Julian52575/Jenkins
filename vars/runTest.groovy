@@ -37,6 +37,6 @@ def call(Map config = [:]) {
     //
     //Print cmd in log
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
-    sh 'echo -n "${config.cmd}" >> new_mouli_log.txt'
+    sh "echo -n ${config.cmd} >> new_mouli_log.txt"
     sh 'echo "\t|" >> new_mouli_log.txt'
 }
