@@ -7,28 +7,28 @@ def call(Map config = [:]) {
 
     sh 'echo "Hello from runTest"'
     //Starting log
-    if ( ${config.name} ) {
+    if ( ${config.name} != null ) {
         sh 'echo -n "\t${config.name}:\t" >> new_mouli_log.txt'
     } else {
         sh 'echo -n "\t${config.cmd}:\t" >> new_mouli_log.txt'
     }
     //
     //Stdout output
-        output = sh (
-            script: '${config.cmd}',
-            returnStdout: true
-        )
-        output = output.trim()
+    output = sh (
+        script: '${config.cmd}',
+        returnStdout: true
+    )
+    output = output.trim()
 
-        if ( output == expOutput ) {
-            printOK()
-        } else {
-            printKO()
-        }
-        sh 'echo -n \t >> new_mouli_log.txt'
+    if ( output == expOutput ) {
+        printOK()
+    } else {
+        printKO()
+    }
+    sh 'echo -n \t >> new_mouli_log.txt'
     //
     //returnValue
-    if ( ${config.expReturnValue} ) {
+    if ( ${config.expReturnValue} != null ) {
         output = sh (
             script: '${config.cmd}',
             returnStatus: true
