@@ -1,5 +1,5 @@
 def call(Map config = [:]) {
-    //name
+    //name -> 1+1
     //cmd -> ./math 1 1 +
     //expOutput -> Your result is 2.
     //expReturnValue -> 0
@@ -28,7 +28,6 @@ def call(Map config = [:]) {
         script: "${config.cmd}",
         returnStatus: true
     )
-    sh 'echo "Debug returnValue _${statusCode}_" '
     if ( statusCode == config.expReturnValue ) {
         printOK()
     } else {
