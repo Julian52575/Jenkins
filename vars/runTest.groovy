@@ -34,7 +34,7 @@ def call(Map config = [:]) {
     } else {
         printKO()
     }
-    sh 'echo -n "\t|\t\t" >> new_mouli_log.txt'
+    sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     //
     //newline for next test
     sh "echo ${config.cmd}:\t >> new_mouli_log.txt"
