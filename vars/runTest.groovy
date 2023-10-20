@@ -5,7 +5,6 @@ def call(Map config = [:]) {
     //expReturnValue -> 0
     output = " "
 
-    sh 'echo "Hello from runTest" '
     //Starting log
     sh "echo -n ${config.name}: >> new_mouli_log.txt"
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
@@ -24,18 +23,20 @@ def call(Map config = [:]) {
     }
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     //
-    //returnValue
+    //ReturnValue
     output = sh (
         script: "${config.cmd}",
         returnStatus: true
     )
+    sh 'echo "Debug returnValue ${output}" '
     if ( output == config.expReturnValue ) {
         printOK()
     } else {
         printKO()
     }
-    sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     //
-    //newline for next test
+    //Print cmd in log
+    sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     sh "echo ${config.cmd} >> new_mouli_log.txt"
+    sh 'echo "\t|" >> new_mouli_log.txt'
 }
