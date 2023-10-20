@@ -15,7 +15,7 @@ def call(Map config = [:]) {
     //
     //Stdout output
     output = sh (
-        script: '${config.cmd}',
+        script: "${config.cmd}",
         returnStdout: true
     )
     output = output.trim()
@@ -25,12 +25,12 @@ def call(Map config = [:]) {
     } else {
         printKO()
     }
-    sh 'echo -n \t >> new_mouli_log.txt'
+    sh "echo -n \t >> new_mouli_log.txt"
     //
     //returnValue
-    if ( ${config.expReturnValue} != null ) {
+    if ( config.expReturnValue != null ) {
         output = sh (
-            script: '${config.cmd}',
+            script: "${config.cmd}",
             returnStatus: true
         )
         if ( output == expReturnValue ) {
@@ -41,5 +41,5 @@ def call(Map config = [:]) {
     }
     //
     //newline for next test
-    sh 'echo -n \n >> new_mouli_log.txt'
+    sh "echo -n \n >> new_mouli_log.txt"
 }
