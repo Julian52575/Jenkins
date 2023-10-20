@@ -28,7 +28,7 @@ def call(Map config = [:]) {
         script: "${config.cmd}",
         returnStatus: true
     )
-    sh 'echo "Debug returnValue ${output}" '
+    sh 'echo "Debug returnValue _${output}_" '
     if ( output == config.expReturnValue ) {
         printOK()
     } else {
@@ -37,6 +37,6 @@ def call(Map config = [:]) {
     //
     //Print cmd in log
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
-    sh "echo ${config.cmd} >> new_mouli_log.txt"
+    sh 'echo -n "${config.cmd}" >> new_mouli_log.txt'
     sh 'echo "\t|" >> new_mouli_log.txt'
 }
