@@ -7,7 +7,7 @@ def call(Map config = [:]) {
 
     sh 'echo "Hello from runTest"'
     //Starting log
-    if ( ${config.name} != null ) {
+    if ( config.name != null ) {
         sh 'echo -n "\t${config.name}:\t" >> new_mouli_log.txt'
     } else {
         sh 'echo -n "\t${config.cmd}:\t" >> new_mouli_log.txt'
