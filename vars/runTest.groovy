@@ -20,7 +20,7 @@ def call(Map config = [:]) {
     )
     output = output.trim()
 
-    if ( output == expOutput ) {
+    if ( output == config.expOutput ) {
         printOK()
     } else {
         printKO()
@@ -33,7 +33,7 @@ def call(Map config = [:]) {
             script: "${config.cmd}",
             returnStatus: true
         )
-        if ( output == expReturnValue ) {
+        if ( output == config.expReturnValue ) {
             printOK()
         } else {
             printKO()
