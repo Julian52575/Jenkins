@@ -4,7 +4,8 @@ def call(Map config = [:]) {
     //expOutput -> Your result is 2.
     //expReturnValue -> 0
     output = " "
-   
+
+    sh 'echo "Hello from runTest"'
     //Starting log
     if ( ${config.name} ) {
         sh 'echo -n "\t${config.name}:\t" >> new_mouli_log.txt'
