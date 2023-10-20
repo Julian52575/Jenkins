@@ -15,7 +15,7 @@ def call(Map config = [:]) {
     //
     //Stdout output
     output = sh (
-        script: "${config.cmd}",
+        script: "${config.cmd} || true",
         returnStdout: true
     )
     output = output.trim()
