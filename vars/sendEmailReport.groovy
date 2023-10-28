@@ -1,5 +1,5 @@
 def call(Map config = [:] ) {
-    sh 'echo "\n\n." >> new_mouli_log.txt'
+    sh 'echo "\n\nCourtesy of everyone\'s favorite Rulian©." >> new_mouli_log.txt'
     logContent = sh (
                 script: 'cat new_mouli_log.txt',
                 returnStdout: true
