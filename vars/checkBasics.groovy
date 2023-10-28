@@ -6,6 +6,8 @@ def call(Map config = [:]) {
     sh "echo ${config.author} >> new_mouli_log.txt"
     sh 'date "+%A %d %B - %H:%M" >> new_mouli_log.txt'
     sh 'echo "---" >> new_mouli_log.txt'
+    sh 'echo " " >> new_mouli_log.txt'
+    sh 'echo " " >> new_mouli_log.txt'
     //
     hasCompiled = checkCompilation( name:"${config.name}" )
     if ( hasCompiled == 1 ) {
@@ -13,4 +15,6 @@ def call(Map config = [:]) {
     }
     //checkMakefileClean( name:"math" )
     hasDebugSymbols = checkDebugSymbols( name:"${config.name}" )
+    sh 'echo " " >> new_mouli_log.txt'
+    return hasCompiled
 }
