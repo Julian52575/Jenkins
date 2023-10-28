@@ -1,4 +1,5 @@
 def call(Map config = [:] ) {
+    sh 'echo "\n\n." >> new_mouli_log.txt'
     logContent = sh (
                 script: 'cat new_mouli_log.txt',
                 returnStdout: true
