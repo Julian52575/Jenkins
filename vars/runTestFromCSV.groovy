@@ -19,7 +19,7 @@ def call(Map config = [:]) {
             name: fields[0],
             cmd: fields[1],
             expOutput: fields[2],
-            expReturnValue: fields[3]
+            expReturnValue: fields[3] as Integer
         )
     }
 }
