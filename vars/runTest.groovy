@@ -3,7 +3,8 @@ def call(Map config = [:]) {
     //cmd -> ./math 1 1 +
     //expOutput -> Your result is 2.
     //expReturnValue -> 0
-
+    def statusOK = true
+    def outputOK = true
     //Starting log
     sh "echo -n ${config.name}: >> new_mouli_log.txt"
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
@@ -19,6 +20,7 @@ def call(Map config = [:]) {
         printOK()
     } else {
         printKO()
+        outputOK = false
     }
     sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
     //
@@ -31,6 +33,7 @@ def call(Map config = [:]) {
         printOK()
     } else {
         printKO()
+        statusOK = false
     }
     //
     //Print cmd in log
@@ -39,5 +42,12 @@ def call(Map config = [:]) {
     sh 'echo "\t|" >> new_mouli_log.txt'
     //
     //Print result in next line
-    sh "echo '\t\t|O${env.output}\t\t|S${statusCode}\t\t|' >> new_mouli_log.txt"
+    if ( statusOK == false ) {
+        sh "echo 'ReturnValue: ${statusCode}.' >> new_mouli_log.txt"
+    }
+    if ( outputOK == false ) {
+        sh "echo 'ReturnOutput:\n[[${output}]]' >> new_mouli_log.txt"
+        printTableEnd()
+    }
+    //sh "echo '\t\t|''O${output}\t\t|S${statusCode}\t\t|' >> new_mouli_log.txt"
 }
