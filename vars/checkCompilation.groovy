@@ -10,7 +10,7 @@ def call(Map config = [:] ) {
     if ( hasMakefile != 0 ) {
         printKO()
         sh "echo 'You don\'t even have a Makefile ??' >> ${config.logName}"
-        exit 84
+        return 84
     }
     //MAKE
     def hasCompiled = sh (
@@ -25,7 +25,7 @@ def call(Map config = [:] ) {
             returnStdout: true
         )
         sh "echo '${compilationLog}' >> ${config.logName}"
-        exit 84
+        return 84
     }
     //TEST -X 
     def isExecutable = sh (
@@ -35,7 +35,7 @@ def call(Map config = [:] ) {
     if ( isExecutable != 0 ) {
         printKO()
         sh "echo 'File or Execute bit missing (for real ?).' >> ${config.logName}"
-        exit 84
+        return 84
     }
     //LOGGING
     printOK()
