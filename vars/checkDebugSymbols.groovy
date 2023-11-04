@@ -1,11 +1,11 @@
 def call(Map config = [:]) {
-    hasDebugSymbol = sh (
+    def hasDebugSymbol = sh (
         script: "file ${config.name} | grep -v 'with debug_info'",
         returnStatus: true
     )
     //Logging
     sh "echo -n '[[[Debug symbol:\t' >> ${config.logName}"
-    if ( hasDebugSymbol == "0" ) {
+    if ( hasDebugSymbol == 0 ) {
         printOK(
             logName: "${config.logName}"
         )
