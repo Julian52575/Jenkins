@@ -14,13 +14,22 @@ def call(Map config = [:]) {
     sh "echo -n ${config.name}: >> ${config.logName}"
     sh "echo -n '\t\t|\t' >> ${config.logName}"
     //
-    //Stdout output
-    def output = sh (
-        script: "${config.cmd} || true",
-        returnStdout: true
-    )
+    //
+    //Run CMD and fill Output && statusCode
+    //
+    def output = " "
+    timeout(time: 2, unit: 'MINUTES') {
+        def statusCode = sh (
+            script: "${config.cmd} > cmdOutput.txt",
+            returnStatus: true
+        )
+    }
+    output = sh (
+                script: "cat cmdOutput.txt",
+                returnStdout: true
+            )
     output = output.trim()
-
+    //
     if ( output == config.expOutput ) {
         printOK(
            logName: "${config.logName}"
@@ -33,11 +42,6 @@ def call(Map config = [:]) {
     }
     sh "echo -n '\t\t|\t' >> ${config.logName}"
     //
-    //ReturnValue
-    def statusCode = sh (
-        script: "${config.cmd}",
-        returnStatus: true
-    )
     if ( statusCode == config.expReturnValue ) {
         printOK(
             logName: "${config.logName}"
