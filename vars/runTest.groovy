@@ -67,7 +67,7 @@ def call(Map config = [:]) {
     doInDepthLog(
         cmd: "${config.cmd}",
         output: "${output}",
-        statusCode: "${statusCode}"
+        statusCode: "${statusCode}",
         depthName: "${config.depthName}"
     ) 
 }
