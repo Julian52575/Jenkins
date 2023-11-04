@@ -9,5 +9,5 @@ def call(Map config = [:] ) {
     emailext body: "${logContent}",
     subject: "[New Mouli] Logs for ${config.projectName}",
     to: params.Email,
-    attachmentsPattern: 'new_mouli_log.txt'
+    attachmentsPattern: 'InDepth.log'
 }

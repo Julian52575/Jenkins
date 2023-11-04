@@ -49,5 +49,10 @@ def call(Map config = [:]) {
         sh "echo 'ReturnOutput:\n[[${output}]]' >> new_mouli_log.txt"
         printTableEnd()
     }
+    doInDepthLog(
+        cmd: "${config.cmd}",
+        output: "${output}",
+        statusCode: "${statusCode}"
+    ) 
     //sh "echo '\t\t|''O${output}\t\t|S${statusCode}\t\t|' >> new_mouli_log.txt"
 }
