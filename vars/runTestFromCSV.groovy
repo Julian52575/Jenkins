@@ -10,7 +10,7 @@
 def call(Map config = [:]) {
     if ( fileExists("${config.CSVname}") == false ) {
         sh "echo 'Invalid CSV name.' >> ${config.logName}"
-        return 84
+        return 0
     }
     def csvFile = readFile "${config.CSVname}"
     
