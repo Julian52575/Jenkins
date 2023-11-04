@@ -4,15 +4,15 @@ def call(Map config = [:]) {
         returnStatus: true
     )
     //Logging
-    sh 'echo -n "[[[Debug symbol:\t" >> new_mouli_log.txt'
+    sh "echo -n '[[[Debug symbol:\t' >> ${config.logName}"
     if ( hasDebugSymbol == "0" ) {
         printOK()
-        sh 'echo -n "No debbuging symbols present in binary." >> new_mouli_log.txt'    
+        sh "echo -n 'No debbuging symbols present in binary.' >> ${config.logName}"
     } else {
         printKO()
-        sh 'echo -n "Binary has been compiled with debbuging info." >> new_mouli_log.txt'
+        sh "echo -n 'Binary has been compiled with debbuging info.' >> ${config.logName}"
     }
-    sh 'echo "\n" >> new_mouli_log.txt'
+    sh "echo '\n' >> ${config.logName}"
     //
     return hasDebugSymbol
 }

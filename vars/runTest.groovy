@@ -1,13 +1,18 @@
-def call(Map config = [:]) {
+
     //name -> 1+1
     //cmd -> ./math 1 1 +
     //expOutput -> Your result is 2.
     //expReturnValue -> 0
+    //logName -> new_mouli.log
+    //depthName -> InDepth.log
+
+
+def call(Map config = [:]) {
     def statusOK = true
     def outputOK = true
-    //Starting log
-    sh "echo -n ${config.name}: >> new_mouli_log.txt"
-    sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
+    //Printing Name
+    sh "echo -n ${config.name}: >> ${config.logName}"
+    sh "echo -n '\t\t|\t' >> ${config.logName}"
     //
     //Stdout output
     def output = sh (
@@ -22,7 +27,7 @@ def call(Map config = [:]) {
         printKO()
         outputOK = false
     }
-    sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
+    sh "echo -n '\t\t|\t' >> ${config.logName}"
     //
     //ReturnValue
     def statusCode = sh (
@@ -37,22 +42,22 @@ def call(Map config = [:]) {
     }
     //
     //Print cmd in log
-    sh 'echo -n "\t\t|\t" >> new_mouli_log.txt'
-    sh "echo -n ${config.cmd} >> new_mouli_log.txt"
-    sh 'echo "\t|" >> new_mouli_log.txt'
+    sh "echo -n '\t\t|\t' >> ${config.logName}"
+    sh "echo -n ${config.cmd} >> ${config.logName}"
+    sh "echo '\t|' >> ${config.logName}"
     //
     //Print result in next line
     if ( statusOK == false ) {
-        sh "echo 'ReturnValue: ${statusCode}.' >> new_mouli_log.txt"
+        sh "echo 'ReturnValue: ${statusCode}.' >> ${config.logName}"
     }
     if ( outputOK == false ) {
-        sh "echo 'ReturnOutput:\n[[${output}]]' >> new_mouli_log.txt"
+        sh "echo 'ReturnOutput:\n[[${output}]]' >> ${config.logName}"
         printTableEnd()
     }
     doInDepthLog(
         cmd: "${config.cmd}",
         output: "${output}",
         statusCode: "${statusCode}"
+        depthName: "${config.depthName}"
     ) 
-    //sh "echo '\t\t|''O${output}\t\t|S${statusCode}\t\t|' >> new_mouli_log.txt"
 }

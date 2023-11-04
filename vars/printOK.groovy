@@ -1,4 +1,4 @@
 def call() {
-    sh 'echo -n "OK. " >> new_mouli_log.txt'
+    sh "echo -n 'OK. ' >> ${config.logName}"
 }
 
