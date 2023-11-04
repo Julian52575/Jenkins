@@ -3,7 +3,7 @@ def call(Map config = [:]) {
     //cmd -> ./math 1 1 +
     //expOutput -> Your result is 2.
     //expReturnValue -> 0
-    def csvFilePath = "./JenkinsNewMouli.csv"
+    def csvFilePath = "./NMtests.csv"
     if ( fileExists(csvFilePath) == false ) {
         return 84
     }
