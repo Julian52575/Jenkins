@@ -11,7 +11,8 @@ def call(Map config = [:]) {
     //
     hasCompiled = checkCompilation( 
                     name:"${config.name}",
-                    logName: "${config.logName}"
+                    logName: "${config.logName}",
+                    depthName: "${config.depthName}"
                   )
     if ( hasCompiled == 1 ) {
         exit 84

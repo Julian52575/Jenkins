@@ -24,7 +24,7 @@ def call(Map config = [:] ) {
             script: 'make || true',
             returnStdout: true
         )
-        sh "echo '${compilationLog}' >> ${config.logName}"
+        sh "echo '>>make\n${compilationLog}' >> ${config.depthName}"
         return 84
     }
     //TEST -X 
