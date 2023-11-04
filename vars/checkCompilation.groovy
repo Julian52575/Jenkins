@@ -8,7 +8,9 @@ def call(Map config = [:] ) {
         returnStatus: true
     )
     if ( hasMakefile != 0 ) {
-        printKO()
+        printKO(
+            logName: "${config.logName}"
+        )
         sh "echo 'You don\'t even have a Makefile ??' >> ${config.logName}"
         return 84
     }
@@ -17,14 +19,16 @@ def call(Map config = [:] ) {
         script: 'make',
         returnStatus: true
     )
+    def compilationLog = sh (
+        script: 'make || true',
+        returnStdout: true
+    )
+    sh "echo '>>make\n${compilationLog}\n' >> ${config.depthName}"
     if ( hasCompiled != 0 ) {
-        printKO()
-        sh "echo 'Compilation failed with status ${hasCompiled}:' >> ${config.logName}"
-        def compilationLog = sh (
-            script: 'make || true',
-            returnStdout: true
+        printKO(
+            logName: "${config.logName}"
         )
-        sh "echo '>>make\n${compilationLog}' >> ${config.depthName}"
+        sh "echo 'Compilation failed with status ${hasCompiled}:' >> ${config.logName}"
         return 84
     }
     //TEST -X 
@@ -33,12 +37,16 @@ def call(Map config = [:] ) {
     //    returnStatus: true
     //)
     //if ( isExecutable != 0 ) {
-    //    printKO()
+    //    printKO(
+    //      logName: "${config.logName}"
+    //    )
     //    sh "echo 'File or Execute bit missing (for real ?).' >> ${config.logName}"
     //    return 84
     //}
     //LOGGING
-    printOK()
+    printOK(
+         logName: "${config.logName}"
+   )
     sh "echo '${config.name} has been compiled succesfully!' >> ${config.logName}"
     return 0
 }

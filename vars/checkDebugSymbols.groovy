@@ -6,10 +6,14 @@ def call(Map config = [:]) {
     //Logging
     sh "echo -n '[[[Debug symbol:\t' >> ${config.logName}"
     if ( hasDebugSymbol == "0" ) {
-        printOK()
+        printOK(
+            logName: "${config.logName}"
+        )
         sh "echo -n 'No debbuging symbols present in binary.' >> ${config.logName}"
     } else {
-        printKO()
+        printKO(
+            logName: "${config.logName}"
+        )
         sh "echo -n 'Binary has been compiled with debbuging info.' >> ${config.logName}"
     }
     sh "echo '\n' >> ${config.logName}"

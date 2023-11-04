@@ -22,9 +22,13 @@ def call(Map config = [:]) {
     output = output.trim()
 
     if ( output == config.expOutput ) {
-        printOK()
+        printOK(
+           logName: "${config.logName}"
+        )
     } else {
-        printKO()
+        printKO(
+            logName: "${config.logName}"
+        )
         outputOK = false
     }
     sh "echo -n '\t\t|\t' >> ${config.logName}"
@@ -35,9 +39,13 @@ def call(Map config = [:]) {
         returnStatus: true
     )
     if ( statusCode == config.expReturnValue ) {
-        printOK()
+        printOK(
+            logName: "${config.logName}"
+        )
     } else {
-        printKO()
+        printKO(
+            logName: "${config.logName}"
+        )
         statusOK = false
     }
     //
@@ -52,7 +60,9 @@ def call(Map config = [:]) {
     }
     if ( outputOK == false ) {
         sh "echo 'ReturnOutput:\n[[${output}]]' >> ${config.logName}"
-        printTableEnd()
+        printTableEnd(
+            logName: "${config.logName}"
+        )
     }
     doInDepthLog(
         cmd: "${config.cmd}",
