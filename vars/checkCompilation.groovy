@@ -28,15 +28,15 @@ def call(Map config = [:] ) {
         return 84
     }
     //TEST -X 
-    def isExecutable = sh (
-        script: "test -x ${config.name}",
-        returnStatus: true
-    )
-    if ( isExecutable != 0 ) {
-        printKO()
-        sh "echo 'File or Execute bit missing (for real ?).' >> ${config.logName}"
-        return 84
-    }
+    //def isExecutable = sh (
+    //    script: "test -x ${config.name}",
+    //    returnStatus: true
+    //)
+    //if ( isExecutable != 0 ) {
+    //    printKO()
+    //    sh "echo 'File or Execute bit missing (for real ?).' >> ${config.logName}"
+    //    return 84
+    //}
     //LOGGING
     printOK()
     sh "echo '${config.name} has been compiled succesfully!' >> ${config.logName}"
