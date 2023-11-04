@@ -1,7 +1,7 @@
 def call(Map config = [:] ) {
     hasCompiled = 0
 
-    sh "echo -n '[[[Compilation: \t' >> ${config.logName}"
+    sh "echo -n '*Compilation: \t' >> ${config.logName}"
     //TEST MAKEFILE
     def hasMakefile = sh (
         script: 'test Makefile',

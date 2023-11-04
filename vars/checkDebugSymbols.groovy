@@ -4,7 +4,7 @@ def call(Map config = [:]) {
         returnStatus: true
     )
     //Logging
-    sh "echo -n '[[[Debug symbol:\t' >> ${config.logName}"
+    sh "echo -n '*Debug symbol:\t' >> ${config.logName}"
     if ( hasDebugSymbol == 0 ) {
         printOK(
             logName: "${config.logName}"
