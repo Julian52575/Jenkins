@@ -18,8 +18,9 @@ def call(Map config = [:]) {
     //Run CMD and fill Output && statusCode
     //
     def output = " "
+    def statusCode = 0
     timeout(time: 2, unit: 'MINUTES') {
-        def statusCode = sh (
+        statusCode = sh (
             script: "${config.cmd} > cmdOutput.txt",
             returnStatus: true
         )
