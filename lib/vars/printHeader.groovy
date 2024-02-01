@@ -1,15 +1,15 @@
 def call(Map config = [:]) {
     hasCompiled = 0
     author = currentBuild.getBuildCauses()[0].shortDescription + " / " + currentBuild.getBuildCauses()[0].userId
-    date = date '+%A %d %B - %H:%M'
-    merge = config.name + '|' + author + '|' + date + '|' 
+    currentTime = date '+%A %d %B - %H:%M'
+    mergedText = config.name + '|' + author + '|' + currentTime + '|' 
     strlen = sh (
-        script: 'echo -n "${merge}" | wc -c',
+        script: 'echo -n "${mergedText}" | wc -c',
         returnStdout: true
     )
 
     //Prints Header
-    sh "echo '${config.name}|${author}|${date}|' > ${config.logName}"
+    sh "echo '${mergedText}' > ${config.logName}"
     sh "printf '%0.s-' {1..${strlen}} >> ${config.logName}"
     sh "echo ' ' >> ${config.logName}"
 }
