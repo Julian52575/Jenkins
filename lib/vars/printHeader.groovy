@@ -13,6 +13,6 @@ def call(Map config = [:]) {
 
     //Prints Header
     sh "echo '${mergedText}' > ${config.logName}"
-    sh "printf '%0.s-' {1..${strlen} } >> ${config.logName}"
+    sh "printf '%0.s- {1..${strlen} }' >> ${config.logName}"
     sh "echo ' ' >> ${config.logName}"
 }
