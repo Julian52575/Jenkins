@@ -1,7 +1,10 @@
 def call(Map config = [:]) {
     hasCompiled = 0
     author = currentBuild.getBuildCauses()[0].shortDescription + " / " + currentBuild.getBuildCauses()[0].userId
-    currentTime = date '+%A %d %B - %H:%M'
+    currentTime = sh (
+        script: 'date "+%A %d %B - %H:%M" ',
+        returnStdout: true
+    )
     mergedText = config.name + '|' + author + '|' + currentTime + '|' 
     strlen = sh (
         script: 'echo -n "${mergedText}" | wc -c',
