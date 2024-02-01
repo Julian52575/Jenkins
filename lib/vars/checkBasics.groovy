@@ -14,8 +14,8 @@ def call(Map config = [:]) {
                     logName: "${config.logName}",
                     depthName: "${config.depthName}"
                   )
-    if ( hasCompiled == 1 ) {
-        exit 84
+    if ( hasCompiled == 84 ) {
+        return 84
     }
     //checkMakefileClean( name:"math" )
     hasDebugSymbols = checkDebugSymbols(
@@ -23,5 +23,5 @@ def call(Map config = [:]) {
                         logName: "${config.logName}"
                       )
     sh "echo ' ' >> ${config.logName}"
-    return hasCompiled
+    return 0
 }
