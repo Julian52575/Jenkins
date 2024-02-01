@@ -3,7 +3,8 @@ def call(Map config = [:]) {
 
     //Prints Header
     sh "echo ${config.name} > ${config.logName}"
-    sh "echo ${config.author} >> ${config.logName}"
+    //sh "echo ${config.author} >> ${config.logName}"
+    sh "echo ${BUILD_TRIGGER_BY} >> ${config.logName}"
     sh "date '+%A %d %B - %H:%M' >> ${config.logName}"
     sh "echo '---' >> ${config.logName}"
     sh "echo ' ' >> ${config.logName}"
