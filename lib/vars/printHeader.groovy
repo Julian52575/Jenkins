@@ -3,7 +3,10 @@ def call(Map config = [:]) {
     author = currentBuild.getBuildCauses()[0].shortDescription + " / " + currentBuild.getBuildCauses()[0].userId
     date = date '+%A %d %B - %H:%M'
     merge = config.name + '|' + author + '|' + date + '|' 
-    strlen = echo -n merge | wc -c
+    strlen = sh (
+        script: 'echo -n "${merge}" | wc -c',
+        returnStdout: true
+    )
 
     //Prints Header
     sh "echo '${config.name}|${author}|${date}|' > ${config.logName}"
