@@ -5,14 +5,15 @@ def call(Map config = [:]) {
         script: "date '+%A %d %B - %H:%M' | tr -d '\n'",
         returnStdout: true
     )
-    mergedText = config.name + ' | ' + author + ' | ' + currentTime + ' | ' 
+    mergedText = config.name + ' | ' + author + ' | ' + currentTime + ' | '
     strlen = sh (
         script: 'echo -n "${mergedText}" | wc -c | tr -d "\n" ',
         returnStdout: true
     )
+    chinaWall = sh " printf %100s |tr ' ' '=' "
 
     //Prints Header
     sh "echo '${mergedText}' > ${config.logName}"
-    sh "echo $(printf %100s |tr ' ' '=' ) >> ${config.logName}"
+    sh "echo '${chinaWall}' >> ${config.logName}"
     sh "echo ' ' >> ${config.logName}"
 }
