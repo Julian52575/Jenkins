@@ -5,7 +5,7 @@ def call(Map config = [:]) {
     stdOutput = ""
   
     stdOutput = sh (
-        script: ' ${config.cmd},
+        script: '${config.cmd}',
         returnStdout: true 
     ) == 0
     if ( ${config.logname} == "" ) {
