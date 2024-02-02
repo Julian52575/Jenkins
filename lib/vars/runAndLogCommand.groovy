@@ -1,13 +1,18 @@
 // config.cmd -> command to run
 // config.logName -> logFile to write result into (if any)
+// config.errorFile -> file to log errors into
 def call(Map config = [:]) {
     hasCompiled = 0
     stdOutput = ""
-  
-    stdOutput = sh (
-        script: '${config.cmd}',
-        returnStdout: true 
-    ) == 0
+    status = 0
+    
+    status = sh (
+        script: '${config.cmd} > tmp.txt',
+        returnStatus: true 
+    )
+    if ( status != 0 )
+        return status
+    stdOutput = readFile('tmp.txt').trim()
     if ( ${config.logname} == "" ) {
       sh "echo 'Result: _${stdOutput}_' "
     } else {
