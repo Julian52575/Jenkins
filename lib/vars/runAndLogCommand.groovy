@@ -9,7 +9,7 @@ def call(Map config = [:]) {
 
     sh "echo Executing ${config.cmd}"//////
     
-    classResult  = ${config.cmd}.execute()
+    classResult  = "${config.cmd}".execute()
     stdOutput = classResult.text()
     status = classResult.status()
 
