@@ -2,15 +2,17 @@
 // config.logName -> logFile to write result into (if any)
 // config.errorFile -> file to log errors into
 def call(Map config = [:]) {
-    hasCompiled = 0
-    stdOutput = ""
-    status = 0
+    def hasCompiled = 0
+    def classResult
+    def stdOutput = ""
+    def status = 0
 
     sh "echo Executing ${config.cmd}"//////
-    status = sh (
-        script: '${config.cmd} > tmp.txt',
-        returnStatus: true 
-    )
+    
+    classResult  = ${config.cmd}.execute()
+    stdOutput = classResult.text()
+    status = classResult.status()
+
     if ( status != 0 )
         return status
     stdOutput = readFile('tmp.txt').trim()
