@@ -11,7 +11,7 @@ def call(Map config = [:]) {
     
     classResult  = "${config.cmd}".execute()
     stdOutput = classResult.text()
-    status = classResult.status()
+    //status = classResult.status()
 
     if ( status != 0 )
         return status
