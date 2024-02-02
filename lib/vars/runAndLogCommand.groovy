@@ -5,7 +5,8 @@ def call(Map config = [:]) {
     hasCompiled = 0
     stdOutput = ""
     status = 0
-    
+
+    sh "echo Executing ${config.cmd}"//////
     status = sh (
         script: '${config.cmd} > tmp.txt',
         returnStatus: true 
