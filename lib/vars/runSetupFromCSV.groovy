@@ -1,11 +1,11 @@
     //CSVname -> ./Setup.csv
 
 def call(Map config = [:]) {
-    if ( fileExists("${config.CSVname}") == false ) {
-        sh "echo 'Cannot find CSV name for Setup \"${config.CSVname}\".' >> ${config.logName}"
+    if ( fileExists("${config.CSVpath}") == false ) {
+        sh "echo 'Cannot find CSV name for Setup \"${config.CSVpath}\".' >> ${config.logName}"
         return 84
     }
-    def csvFile = readFile "${config.CSVname}"
+    def csvFile = readFile "${config.CSVpath}"
     def csvLines = csvFile.readLines()
 
     for (def line in csvLines) {
