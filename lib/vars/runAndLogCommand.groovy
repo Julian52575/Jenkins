@@ -34,7 +34,7 @@ def call(Map config = [:]) {
         status = process.exitValue()
         echo "${config.cmd}:\tExit value successful."
         
-        stdOutput = process.text
+        stdOutput = process.text()
         echo "${config.cmd}:\tText succesful."
         
     } catch (Exception e) {
