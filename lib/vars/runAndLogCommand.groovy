@@ -18,6 +18,7 @@ def call(Map config = [:]) {
     transient def process = null
     //Run command thanks to java.lang.Process
     try {
+
         process = "${config.cmd}".execute()
         transient def bob = process.isAlive()
         if ( bob == true ) {
@@ -25,10 +26,12 @@ def call(Map config = [:]) {
         } else {
             echo "${config.cmd}:\tProcess stoped."
         }
+
+        status = process.exitValue()
+        stdOutput = process.text
         //    process.waitFor()
-        //}
+
     } catch (Exception e) {
-        // Log or print the exception details for debugging
         echo "!!! Exception: ${e.message}"
     }
 
@@ -38,8 +41,7 @@ def call(Map config = [:]) {
 
 
     
-    stdOutput = process.text
-    status = process.exitValue()
+
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
 
     if ( status != 0 )
