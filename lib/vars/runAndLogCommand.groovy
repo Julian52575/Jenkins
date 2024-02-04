@@ -45,7 +45,8 @@ def call(Map config = [:]) {
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
-
+    process = null
+    
     echo "Testing expOutput."
     def boolean outputResult = false
     if ( stdOutput == expOutput ) {
