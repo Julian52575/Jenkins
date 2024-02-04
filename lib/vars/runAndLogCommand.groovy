@@ -4,7 +4,7 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-//@NonCPS //is needed ?
+@NonCPS //is needed ?
 def call(Map config = [:]) {
     def String commandToRun = config.cmd
     if ( commandToRun == null )
@@ -65,14 +65,16 @@ def call(Map config = [:]) {
             file: "lol.txt",
             text: 'lol\n'
         )
+        /*
         writeFile (
             file: logPath,
             text: ">> "
         )
         writeFile (
             file: logPath,
-            text: "${commandToRun}:\t\t"
+            text: ">> ${commandToRun}:\t\t"
         )
+        */
     }
     echo "After write" ////////////
     echo "Starting comparison and logging."
