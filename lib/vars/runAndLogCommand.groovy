@@ -4,7 +4,7 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-@NonCPS
+//@NonCPS //is needed ?
 def call(Map config = [:]) {
     def String commandToRun = config.cmd
     if ( commandToRun == "" )
