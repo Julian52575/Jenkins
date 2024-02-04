@@ -16,10 +16,22 @@ def call(Map config = [:]) {
     def status = 0
     def stdOutput = ""
     //Run command thanks to java.lang.Process
-    def process = "${config.cmd}".execute()
+    try {
+        def process = "${config.cmd}".execute()
+        if (process.isAlive()) {
+            process.waitFor()
+        }
+    } catch (Exception e) {
+        // Log or print the exception details for debugging
+        echo "!!! Exception: ${e.message}"
+    }
+
+    
     //if ( process.isAlive() == true )
         //process.waitFor() //check return value for timeout ?
 
+
+    
     stdOutput = process.text
     status = process.exitValue()
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
