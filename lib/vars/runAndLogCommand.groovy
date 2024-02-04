@@ -16,8 +16,11 @@ def call(Map config = [:]) {
     def status = 0
     def stdOutput = ""
     //Run command thanks to java.lang.Process
-    def process = "${config.cmd}".execute().waitFor()
-    //Timeout: No documentation, no timeout //process.waitFor(5, java.util.concurrent.TimeUnit.MINUTES)
+    def process = "${config.cmd}".execute()
+    def okay = process.waitFor()
+
+    if ( okay != 0 ) //timeout ?
+        return okay
     stdOutput = process.text
     status = process.exitValue()
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
