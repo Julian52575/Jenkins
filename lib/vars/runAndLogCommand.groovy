@@ -12,7 +12,7 @@ def call(Map config = [:]) {
     sh "echo Executing ${config.cmd}..."/////////////////////////
     def String expOutput = config.expOutput
     def String expStatus = config.expStatus
-    def String logPath = config.logPath
+    transient def String logPath = config.logPath
         if ( logPath == "" )
             logPath = "Result.log"
     def int status = 0 //COmes from java stuff, no cast to sh compatible
@@ -58,7 +58,7 @@ def call(Map config = [:]) {
 
     echo "Before write" //////////String
     writeFile (
-        file: logPath,
+        file: "${logPath}",
         text: ">> "
     )
     writeFile (
