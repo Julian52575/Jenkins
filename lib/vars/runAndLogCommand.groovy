@@ -17,7 +17,7 @@ def call(Map config = [:]) {
     def stdOutput = ""
     //Run command thanks to java.lang.Process
     def process = "${config.cmd}".execute()
-    process.waitFor(301, java.util.concurrent.TimeUnit.SECOND)
+    process.wait(301)
     stdOutput = process.text
     status = process.exitValue
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
