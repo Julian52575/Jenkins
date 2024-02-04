@@ -18,9 +18,9 @@ def call(Map config = [:]) {
     sh "echo Executing ${config.cmd}..."//////
     def classResult  = "${config.cmd}".execute()
     stdOutput = classResult.text
-    //status = classResult.status()
-
-    /*
+    status = classResult.status
+    sh "echo ${status}: _${stdOutput}_"//////
+    
     if ( status != 0 )
         return status
     stdOutput = readFile('tmp.txt').trim()
@@ -29,6 +29,5 @@ def call(Map config = [:]) {
     } else {
       sh "echo 'Ok _${stdOutput}_' >> ${logPath}"
     }
-    */
     return 0
 }
