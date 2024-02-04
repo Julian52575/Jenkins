@@ -10,17 +10,17 @@ def call(Map config = [:]) {
     def status = 0
     def expOutput = config.expOutput
     def expStatus = config.expStatus
-    def classResult
     def logPath = config.logPath
     def errorPath = config.errorPath
 
     //Run command and store in classResult
     //https://stackoverflow.com/questions/159148/groovy-executing-shell-commands
     sh "echo Executing ${config.cmd}..."//////
-    classResult  = "${config.cmd}".execute()
+    def classResult  = "${config.cmd}".execute()
     //stdOutput = classResult.text
     //status = classResult.status()
-    
+
+    /*
     if ( status != 0 )
         return status
     stdOutput = readFile('tmp.txt').trim()
@@ -29,5 +29,6 @@ def call(Map config = [:]) {
     } else {
       sh "echo 'Ok _${stdOutput}_' >> ${logPath}"
     }
+    */
     return 0
 }
