@@ -19,7 +19,7 @@ def call(Map config = [:]) {
     //Run command thanks to java.lang.Process
     try {
         process = "${config.cmd}".execute()
-        def bob = process.isAlive()
+        transient def bob = process.isAlive()
         if ( bob == true ) {
             echo "${config.cmd}:\tProcess still running."
         } else {
