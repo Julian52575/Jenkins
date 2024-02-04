@@ -8,8 +8,7 @@ def call(Map config = [:]) {
     if ( config.cmd == "" )
         return 84
 
-    sh "echo Executing ${config.cmd}..."
-    def status = 0
+    sh "echo Executing ${config.cmd}..."/////////////////////////
     def expOutput = config.expOutput
     def expStatus = config.expStatus
     def logPath = config.logPath
@@ -17,13 +16,11 @@ def call(Map config = [:]) {
     def status = 0
     def stdOutput = ""
     //Run command thanks to java.lang.Process
-    def outputStream = new StringBuffer()
     def process = "${config.cmd}".execute()
-
-    process.waitForProcessOutput(outputStream)
-    stdOutput = outputStream.toString().trim()
+    process.waitFor(301, TimeUnit.SECONDS)
+    stdOutput = process.text
     status = process.exitValue
-    sh "echo ${status}: _${stdOutput}_"//////
+    sh "echo ${status}: _${stdOutput}_"//////////////////////////
 
     if ( status != 0 )
         return status
