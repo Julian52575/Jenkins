@@ -15,7 +15,7 @@ def call(Map config = [:]) {
     def errorPath = config.errorPath
     def status = 0
     def stdOutput = ""
-    def process = null
+    transient def process = null
     //Run command thanks to java.lang.Process
     try {
         process = "${config.cmd}".execute()
