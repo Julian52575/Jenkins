@@ -5,25 +5,28 @@
 // config.errorPath -> file to log errors into
 
 def call(Map config = [:]) {
-    def hasCompiled = 0
-    def stdOutput = ""
+    if ( config.cmd == "" )
+        return 84
+
+    sh "echo Executing ${config.cmd}..."
     def status = 0
     def expOutput = config.expOutput
     def expStatus = config.expStatus
     def logPath = config.logPath
     def errorPath = config.errorPath
+    def status = 0
+    def stdOutput = ""
+    //Run command thanks to java.lang.Process
+    def outputStream = new StringBuffer()
+    def process = "${config.cmd}".execute()
 
-    //Run command and store in classResult
-    //https://stackoverflow.com/questions/159148/groovy-executing-shell-commands
-    sh "echo Executing ${config.cmd}..."//////
-    def classResult  = "${config.cmd}".execute()
-    stdOutput = classResult.text
-    status = classResult.status
+    process.waitForProcessOutput(outputStream)
+    stdOutput = outputStream.toString().trim()
+    status = process.exitValue
     sh "echo ${status}: _${stdOutput}_"//////
-    
+
     if ( status != 0 )
         return status
-    stdOutput = readFile('tmp.txt').trim()
     if ( ${config.logname} == "" ) {
       sh "echo 'Result: _${stdOutput}_' "
     } else {
