@@ -60,6 +60,10 @@ def call(Map config = [:]) {
 
     echo "Before write in ${logPath}." //////////String
     writeFile (
+        file: "lol.txt",
+        text: 'lol\n'
+    )
+    writeFile (
         file: logPath,
         text: ">> "
     )
