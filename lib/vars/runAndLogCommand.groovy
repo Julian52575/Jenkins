@@ -20,6 +20,7 @@ def call(Map config = [:]) {
     try {
 
         process = "${config.cmd}".execute()
+
         transient def bob = process.isAlive()
         if ( bob == true ) {
             echo "${config.cmd}:\tProcess still running."
@@ -27,10 +28,15 @@ def call(Map config = [:]) {
             echo "${config.cmd}:\tProcess stoped."
         }
 
+        process.waitFor()
+        echo "${config.cmd}:\twaitFor successful."
+        
         status = process.exitValue()
+        echo "${config.cmd}:\tExit value successful."
+        
         stdOutput = process.text
-        //    process.waitFor()
-
+        echo "${config.cmd}:\tText succesful."
+        
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
