@@ -13,7 +13,7 @@ def call(Map config = [:]) {
     sh "echo Executing ${config.cmd}..."/////////////////////////
     def String expOutput = config.expOutput
     def String expStatus = config.expStatus
-    transient def String logPath = config.logPath
+    def String logPath = config.logPath
         if ( logPath == "" )
             logPath = "Result.log"
     def int status = 0 //COmes from java stuff, no cast to sh compatible
@@ -24,7 +24,7 @@ def call(Map config = [:]) {
     try {
         process = commandToRun.execute()
 
-        transient def bob = process.isAlive()
+        def bob = process.isAlive()
         if ( bob == true ) {
             echo "${commandToRun}:\tProcess still running."
         } else {
