@@ -58,20 +58,22 @@ def call(Map config = [:]) {
         statusResult = true
     }
 
-    // echo "Before write in ${logPath}." //////////String
-    writeFile(file: "filename.txt", text: "áéíóú", encoding: "UTF-8") //////////
-    writeFile (
-        file: "lol.txt",
-        text: 'lol\n'
-    )
-    writeFile (
-        file: logPath,
-        text: ">> "
-    )
-    writeFile (
-        file: logPath,
-        text: "${commandToRun}:\t\t"
-    )
+    echo "Before write in ${logPath}." //////////String
+    script {
+        writeFile(file: "filename.txt", text: "áéíóú", encoding: "UTF-8") //////////
+        writeFile (
+            file: "lol.txt",
+            text: 'lol\n'
+        )
+        writeFile (
+            file: logPath,
+            text: ">> "
+        )
+        writeFile (
+            file: logPath,
+            text: "${commandToRun}:\t\t"
+        )
+    }
     echo "After write" ////////////
     echo "Starting comparison and logging."
     if ( statusResult == true && outputResult == true ) {
