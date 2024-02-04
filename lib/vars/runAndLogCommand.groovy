@@ -12,13 +12,14 @@ def call(Map config = [:]) {
     def expOutput = config.expOutput
     def expStatus = config.expStatus
     def logPath = config.logPath
-    def errorPath = config.errorPath
-    transient def status = 0 //COmes from java stuff, no cast to sh compatible
-    transient def stdOutput = ""
-    transient def process = null
-    //Run command thanks to java.lang.Process
+        if ( logPath == "" )
+            logPath = "Result.log"
+    def status = 0 //COmes from java stuff, no cast to sh compatible
+    def stdOutput = ""
+    def process = null
+    
+    //Run command thanks to java.lang.Process (fuck the documentation tho)
     try {
-
         process = "${config.cmd}".execute()
 
         transient def bob = process.isAlive()
@@ -38,7 +39,7 @@ def call(Map config = [:]) {
         stdOutput = process.getText().trim()
         echo "${config.cmd}:\tText succesful."
         echo "Get Text:\t${stdOutput}."
-        
+
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
@@ -50,9 +51,10 @@ def call(Map config = [:]) {
     }
     echo "Testing expStatus."
     def boolean statusResult = false
-    if ( status == expStatus )
+    if ( status == expStatus ) {
         statusResult = true
-
+    }
+        
     if ( statusResult == true && outputResult == true ) {
         echo ">> ${config.cmd}:\n\tOK." >> logPath
     } else {
