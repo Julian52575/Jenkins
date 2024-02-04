@@ -56,33 +56,33 @@ def call(Map config = [:]) {
     }
 
     writeFile (
-        file: logPath
+        file: logPath,
         text: ">> ${config.cmd}:\t\t"
     )    
     if ( statusResult == true && outputResult == true ) {
         writeFile (
-            file: logPath
+            file: logPath,
             text: "OK.\n"
         )
     } else {
             writeFile (
-                file: logPath
+                file: logPath,
                 text: "KO"
             )
         if ( outputResult == false ) {
             writeFile (
-                file: logPath
+                file: logPath,
                 text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
             }
         if ( statusResult == false ) {
             writeFile (
-                file: logPath
+                file: logPath,
                 text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
             )
         }
     }
     writeFile (
-            file: logPath
+            file: logPath,
             text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)"
     )
     return 0
