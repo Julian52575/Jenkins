@@ -58,7 +58,8 @@ def call(Map config = [:]) {
     writeFile (
         file: logPath,
         text: ">> ${config.cmd}:\t\t"
-    )    
+    )
+    echo "Starting comparison and logging."
     if ( statusResult == true && outputResult == true ) {
         writeFile (
             file: logPath,
