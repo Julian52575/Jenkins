@@ -18,7 +18,7 @@ def call(Map config = [:]) {
     //https://stackoverflow.com/questions/159148/groovy-executing-shell-commands
     sh "echo Executing ${config.cmd}..."//////
     classResult  = "${config.cmd}".execute()
-    stdOutput = classResult.text
+    //stdOutput = classResult.text
     //status = classResult.status()
     
     if ( status != 0 )
