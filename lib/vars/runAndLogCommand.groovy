@@ -13,7 +13,7 @@ def call(Map config = [:]) {
     def expStatus = config.expStatus
     def logPath = config.logPath
     def errorPath = config.errorPath
-    transient def status = 0
+    transient def status = 0 //COmes from java stuff, no cast to sh compatible
     transient def stdOutput = ""
     transient def process = null
     //Run command thanks to java.lang.Process
@@ -42,5 +42,28 @@ def call(Map config = [:]) {
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
+
+    echo "Testing expOutput."
+    def boolean outputResult = false
+    if ( stdOutput == expOutput ) {
+        outputResult = true
+    }
+    echo "Testing expStatus."
+    def boolean statusResult = false
+    if ( status == expStatus )
+        statusResult = true
+
+    if ( statusResult == true && outputResult == true ) {
+        echo ">> ${config.cmd}:\n\tOK." >> logPath
+    } else {
+        echo ">> ${config.cmd}:\n\tKO:" >> logPath
+        if ( outputResult == false ) {
+            echo "Expected:\n${expOutput}\nBut got:\n${stdOutput}."
+        }
+        if ( statusResult == false ) {
+            echo "Expected:\n${expStatus}\nBut got:\n${status}."
+        }
+    }
+    echo "(^'o')^  ^('o'^)  ^('o'^)^('o'^)" >> logPath
     return 0
 }
