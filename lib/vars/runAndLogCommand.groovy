@@ -5,39 +5,40 @@
 // config.errorPath -> file to log errors into
 
 def call(Map config = [:]) {
-    if ( config.cmd == "" )
+    def String commandToRun = config.cmd
+    if ( commandToRun == "" )
         return 84
 
     sh "echo Executing ${config.cmd}..."/////////////////////////
-    def expOutput = config.expOutput
-    def expStatus = config.expStatus
-    def logPath = config.logPath
+    def String expOutput = config.expOutput
+    def String expStatus = config.expStatus
+    def String logPath = config.logPath
         if ( logPath == "" )
             logPath = "Result.log"
-    def status = 0 //COmes from java stuff, no cast to sh compatible
-    def stdOutput = ""
+    def int status = 0 //COmes from java stuff, no cast to sh compatible
+    def String stdOutput = ""
     def process = null
     
     //Run command thanks to java.lang.Process (fuck the documentation tho)
     try {
-        process = "${config.cmd}".execute()
+        process = commandToRun.execute()
 
         transient def bob = process.isAlive()
         if ( bob == true ) {
-            echo "${config.cmd}:\tProcess still running."
+            echo "${commandToRun}:\tProcess still running."
         } else {
-            echo "${config.cmd}:\tProcess stoped."
+            echo "${commandToRun}:\tProcess stoped."
         }
 
         process.waitFor()
-        echo "${config.cmd}:\twaitFor successful."
+        echo "${commandToRun}:\twaitFor successful."
         
         status = process.exitValue()
-        echo "${config.cmd}:\tExit value successful."
+        echo "${commandToRun}:\tExit value successful."
         echo "Exit value:\t${status}."
         
         stdOutput = process.getText().trim()
-        echo "${config.cmd}:\tText succesful."
+        echo "${commandToRun}:\tText succesful."
         echo "Get Text:\t${stdOutput}."
 
     } catch (Exception e) {
@@ -57,7 +58,7 @@ def call(Map config = [:]) {
 
     writeFile (
         file: logPath,
-        text: ">> ${config.cmd}:\t\t"
+        text: ">> ${commandToRun}:\t\t"
     )
     echo "Starting comparison and logging."
     if ( statusResult == true && outputResult == true ) {
