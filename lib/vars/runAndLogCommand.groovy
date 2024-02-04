@@ -18,7 +18,7 @@ def call(Map config = [:]) {
     def process = null
     //Run command thanks to java.lang.Process
     try {
-        def process = "${config.cmd}".execute()
+        process = "${config.cmd}".execute()
         if (process.isAlive()) {
             process.waitFor()
         }
