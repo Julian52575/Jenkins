@@ -58,7 +58,7 @@ def call(Map config = [:]) {
         statusResult = true
     }
 
-    echo "Before write in ${logPath}." //////////String
+    // echo "Before write in ${logPath}." //////////String
     writeFile(file: "filename.txt", text: "áéíóú", encoding: "UTF-8") //////////
     writeFile (
         file: "lol.txt",
