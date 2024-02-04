@@ -45,7 +45,7 @@ def call(Map config = [:]) {
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
-    process = null
+    process.destroy()
     
     echo "Testing expOutput."
     def boolean outputResult = false
@@ -58,7 +58,7 @@ def call(Map config = [:]) {
         statusResult = true
     }
 
-    echo "Before write" //////////String
+    echo "Before write in ${logPath}." //////////String
     writeFile (
         file: "${logPath}",
         text: ">> "
