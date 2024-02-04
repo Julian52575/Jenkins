@@ -14,7 +14,7 @@ def call(Map config = [:]) {
     def String expOutput = config.expOutput
     def String expStatus = config.expStatus
     def String logPath = config.logPath
-        if ( logPath == "" )
+        if ( logPath == null )
             logPath = "Result.log"
     def int status = 0 //COmes from java stuff, no cast to sh compatible
     def String stdOutput = ""
