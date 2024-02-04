@@ -7,7 +7,7 @@
 //@NonCPS //is needed ?
 def call(Map config = [:]) {
     def String commandToRun = config.cmd
-    if ( commandToRun == "" )
+    if ( commandToRun == null )
         return 84
 
     sh "echo Executing ${config.cmd}..."/////////////////////////
@@ -60,7 +60,7 @@ def call(Map config = [:]) {
 
     echo "Before write in ${logPath}." //////////String
     writeFile (
-        file: "${logPath}",
+        file: logPath,
         text: ">> "
     )
     writeFile (
