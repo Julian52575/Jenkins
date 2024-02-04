@@ -19,9 +19,9 @@ def call(Map config = [:]) {
     //Run command thanks to java.lang.Process
     try {
         process = "${config.cmd}".execute()
-        if (process.isAlive()) {
-            process.waitFor()
-        }
+        //if (process.isAlive()) {
+        //    process.waitFor()
+        //}
     } catch (Exception e) {
         // Log or print the exception details for debugging
         echo "!!! Exception: ${e.message}"
