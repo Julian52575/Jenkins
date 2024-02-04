@@ -13,8 +13,8 @@ def call(Map config = [:]) {
     def expStatus = config.expStatus
     def logPath = config.logPath
     def errorPath = config.errorPath
-    def status = 0
-    def stdOutput = ""
+    transient def status = 0
+    transient def stdOutput = ""
     transient def process = null
     //Run command thanks to java.lang.Process
     try {
@@ -40,14 +40,6 @@ def call(Map config = [:]) {
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
-
-    
-    //if ( process.isAlive() == true )
-        //process.waitFor() //check return value for timeout ?
-
-
-    
-
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
 
     if ( status != 0 )
