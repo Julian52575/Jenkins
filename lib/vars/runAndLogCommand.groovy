@@ -56,10 +56,16 @@ def call(Map config = [:]) {
         statusResult = true
     }
 
+    echo "Before write" //////////String
     writeFile (
         file: logPath,
-        text: ">> ${commandToRun}:\t\t"
+        text: ">> "
     )
+    writeFile (
+        file: logPath,
+        text: "${commandToRun}:\t\t"
+    )
+    echo "After write" ////////////
     echo "Starting comparison and logging."
     if ( statusResult == true && outputResult == true ) {
         writeFile (
