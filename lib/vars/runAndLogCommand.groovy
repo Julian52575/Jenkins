@@ -20,8 +20,6 @@ def call(Map config = [:]) {
     if ( process.isAlive() == true )
         process.waitFor() //check return value for timeout ?
 
-    if ( okay != 0 ) //timeout ?
-        return okay
     stdOutput = process.text
     status = process.exitValue()
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
