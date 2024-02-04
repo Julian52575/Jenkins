@@ -19,7 +19,7 @@ def call(Map config = [:]) {
     def process = "${config.cmd}".execute()
     process.waitFor(5, java.util.concurrent.TimeUnit.MINUTES)
     stdOutput = process.text
-    status = process.exitValue
+    status = process.exitValue()
     sh "echo ${status}: _${stdOutput}_"//////////////////////////
 
     if ( status != 0 )
