@@ -73,7 +73,8 @@ def call(Map config = [:]) {
             writeFile (
                 file: logPath,
                 text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
-            }
+            )
+        }
         if ( statusResult == false ) {
             writeFile (
                 file: logPath,
