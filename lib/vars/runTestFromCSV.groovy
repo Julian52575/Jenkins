@@ -8,14 +8,14 @@
     //CSVpath -> ./NMtests.csv
 
 def call(Map config = [:]) {
-    def logName = config.logName
-    if (logName == "") {
-        logName = "Result.log"
+    def logPath = config.logPath
+    if (logPath == null) {
+        logPath = "Result.log"
     }
     
     def csvPath = config.CSVpath
     if ( fileExists(csvPath) == false ) {
-        echo "runTestFromCsv:\tException: No file named ${csvPath}."
+        sh 'echo "runTestFromCsv:\tException: No file named ${csvPath}." > ${logPath}'
         return false
     }
     def csvContent = readFile "${config.CSVname}"
@@ -41,7 +41,7 @@ def call(Map config = [:]) {
                 cmd: commandToRun,
                 expOutput: fields[2],
                 expReturnValue: fields[3] as Integer,
-                logName: config.logName,
+                logPath: logPath,
             )
         }
         if (commandToRun == "bash tmp.sh") {
