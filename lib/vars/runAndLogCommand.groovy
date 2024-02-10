@@ -30,8 +30,9 @@ def call(Map config = [:]) {
         def list[2] = runCmdFromString(
             cmd = commandToRun
         )
-        stdOutput = list[0]
-        status = list[1]
+        list.every()
+        stdOutput = list.get(0)
+        status = list.get(1)
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
