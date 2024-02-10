@@ -61,7 +61,30 @@ def logOK(Map config = [:]) {
     )
 }
 
+//    config.cmd    ->    command to run as a string
 @NonCPS
+def executeCmdFromString(Map config = [:]) {
+    def String stdOutput = ""
+    def int status = 0
+    def process = null
+
+    if ( config.cmd == null )
+        return ["", 0]
+    try {
+        //Run command thanks to java.lang.Process (f*ck the documentation tho)
+        process = config.cmd.execute()
+        if ( process.isAlive() ) {
+            process.waitFor()
+        }
+        status = process.exitValue()
+        stdOutput = process.getText().trim()
+        //process.destroy()
+    } catch (Exception e) {
+        throw e
+    }
+    return [stdOutput, status]
+}
+
 def call(Map config = [:]) {
     def String commandToRun = config.cmd
     if ( commandToRun == null )
@@ -77,25 +100,15 @@ def call(Map config = [:]) {
     def String stdOutput = ""
     def process = null
     
-    //Run command thanks to java.lang.Process (f*ck the documentation tho)
     try {
-        echo "1\n"
-        process = commandToRun.execute()
-
-        echo "2\n"
-        if ( process.isAlive() ) {
-            process.waitFor()
-        }
-        echo "3\n"
-        status = process.exitValue()
-        echo "4\n"
-        stdOutput = process.getText().trim()
-
+        def list = executeCmdFromString(
+            cmd = commandToRun
+        )
+        stdOutput = list[0]
+        status = list[1]
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
-    echo "5\n"
-    process.destroy()
     
     echo "Testing expOutput.\n"
     def boolean outputResult = false
