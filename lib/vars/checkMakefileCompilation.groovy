@@ -1,6 +1,7 @@
 def call(Map config = [:] ) {
     def int hasCompiled = 0
     def boolean hasMakefile = false
+    def String compilationLog = ""
     
     sh "echo -n '*Compilation: \t' >> ${config.logName}"
     //TEST MAKEFILE
@@ -16,16 +17,16 @@ def call(Map config = [:] ) {
         return 84
     }
     //MAKE
-    def hasCompiled = sh (
+    hasCompiled = sh (
         script: 'make',
         returnStatus: true
-    )
-    def compilationLog = sh (
+    ) == 0
+    compilationLog = sh (
         script: 'make || true',
         returnStdout: true
     )
     sh "echo '>>make\n${compilationLog}\n' >> ${config.depthName}"
-    if ( hasCompiled != 0 ) {
+    if ( hasCompiled == false ) {
         printKO(
             logName: "${config.logName}"
         )
