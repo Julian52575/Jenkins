@@ -4,13 +4,13 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-logWrongStatus(String logPath, int expStatus, int status) {
+logWrongStatus() {
     writeFile (
         file: logPath,
         text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
     )
 }
-logWrongOutput(String logPath, String expOutput, String stdOutput) {
+logWrongOutput() {
     writeFile (
         file: logPath,
         text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
@@ -23,8 +23,9 @@ logWrongOutput(String logPath, String expOutput, String stdOutput) {
 //    stdOutput    ->    Output that was produced by the command
 //    
 //
-logKO(String logPath, String cmd, boolean outputResult, String expOutput, String stdOutput,
-                                  boolean statusResult, int expStatus, int status)             {
+logKO() {
+    //String logPath, String cmd, boolean outputResult, String expOutput, String stdOutput,
+    //                              boolean statusResult, int expStatus, int status)             {
     echo "Logging KO\n"
     writeFile (
         file: logPath,
@@ -41,7 +42,8 @@ logKO(String logPath, String cmd, boolean outputResult, String expOutput, String
         text: "       v('_'v)\n\n"
     )
 }
-logOK(String logPath, String cmd) {
+logOK() {
+    //String logPath, String cmd) {
     echo "Logging OKay\n"
     writeFile (
         file: logPath,
