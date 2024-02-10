@@ -69,7 +69,7 @@ def call(Map config = [:]) {
     def String expOutput = config.expOutput
     def String expStatus = config.expStatus
     def String logPath = config.logPath
-        if ( logPath == null )
+        if ( logPath == null || logPath == "" )
             logPath = "Result.log"
     def int status = 0
     def String stdOutput = ""
