@@ -10,9 +10,9 @@ def call(Map config = [:]) {
     )
     mergedText = config.name + ' | ' + author + ' | ' + currentTime + ' | '
     strlen = sh (
-        script: 'echo -n "${mergedText}" | wc -c | tr -d "\n" ',
-        returnStdout: true
-    ).trim()
+                script: 'echo -n "${mergedText}" | wc -c',
+                returnStdout: true
+            ).trim('\n')
     chinaWall = sh (
                     script: " printf %${strlen}s |tr ' ' '-' ",
                     returnStdout: true
