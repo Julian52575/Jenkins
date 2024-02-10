@@ -22,13 +22,14 @@ def call(Map config = [:]) {
     def String csvLines = csvContent.readLines()
     def String commandToRun = ""
     
+    echo "\tBefore for loop with _${csvPath}_"///////////////////////////////
     for (def line in csvLines) {
         def fields = line.split(',')
         //Fail safe for too small CSV line
         if (fields.size() < 4)
             continue
         commandToRun = fields[1]
-        echo "\tRunning ${commandToRun}"
+        echo "\tRunning ${commandToRun}"//////////////////////////////////////
         //if CommandToRun is a path to a bash script (starts with ./)
         if (commandToRun != "" && commandToRun[0] == '.' && commandToRun[1][1] == '/') {
             loadScript(
