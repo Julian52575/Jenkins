@@ -54,7 +54,6 @@ def call(Map config = [:]) {
         if (commandToRun == "bash tmp.sh") {
             sh 'rm tmp.sh'
         }
-        return true
     }
     return true
 }
