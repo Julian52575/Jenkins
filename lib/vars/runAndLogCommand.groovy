@@ -4,15 +4,15 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-logWrongStatus() {
+logWrongStatus(String logPath5, int expStatus5, int status5) {
     writeFile (
-        file: logPath,
-        text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
+        file: logPath5,
+        text: "Expected return status:\n${expStatus5}\nBut got:\n${status5}.\n"
     )
 }
-logWrongOutput() {
+logWrongOutput(String logPath4, String expOutput4, String stdOutput4) {
     writeFile (
-        file: logPath,
+        file: logPath4,
         text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
     )
 }
@@ -23,32 +23,32 @@ logWrongOutput() {
 //    stdOutput    ->    Output that was produced by the command
 //    
 //
-logKO(String logPath, String cmd, boolean outputResult, String expOutput, String stdOutput,
-                                  boolean statusResult, int expStatus, int status)             {
+logKO(String logPath3, String cmd3, boolean outputResult3, String expOutput3, String stdOutput3,
+                                  boolean statusResult3, int expStatus3, int status3)             {
     echo "Logging KO\n"
     writeFile (
-        file: logPath,
-        text: ">> ${cmd}:KO\n"
+        file: logPath3,
+        text: ">> ${cmd3}:KO\n"
     )
     if ( config.outputResult == false ) {
-        logWrongOutput(logPath, expOutput, stdOutput)
+        logWrongOutput(logPath3, expOutput3, stdOutput3)
     }
     if ( config.statusResult == false ) {
-        logWrongStatus(logPath, expStatus, status)
+        logWrongStatus(logPath3, expStatus3, status3)
     }
     writeFile (
-        file: logPath,
+        file: logPath3,
         text: "       v('_'v)\n\n"
     )
 }
-logOK(String logPath, String cmd) {
+logOK(String logPath2, String cmd2) {
     echo "Logging OKay\n"
     writeFile (
-        file: logPath,
-        text: ">> ${cmd}:OK\n"
+        file: logPath2,
+        text: ">> ${cmd2}:OK\n"
     )
     writeFile (
-        file: logPath,
+        file: logPath2,
         text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\n"
     )
 }
