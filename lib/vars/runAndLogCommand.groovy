@@ -4,13 +4,13 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-def logWrongStatus(Map config = [:]) {
+logWrongStatus(Map config = [:]) {
     writeFile (
         file: config.logPath,
         text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
     )
 }
-def logWrongOutput(Map config = [:]) {
+logWrongOutput(Map config = [:]) {
     writeFile (
         file: config.logPath,
         text: "Expected output in stdout:\n${config.expOutput}\nBut got:\n${config.stdOutput}.\n"
