@@ -14,7 +14,7 @@ def call(Map config = [:]) {
     //    returnStdout: true
     //)
     chinaWall = sh (
-                    script: " printf %100s |tr ' ' '=' "
+                    script: " printf %100s |tr ' ' '=' ",
                     returnStdout: true
                 )
 
