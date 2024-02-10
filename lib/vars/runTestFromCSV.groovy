@@ -8,27 +8,28 @@
     //CSVpath -> ./NMtests.csv
 
 def call(Map config = [:]) {
-    def logPath = config.logPath
+    def String logPath = config.logPath
     if (logPath == null) {
         logPath = "Result.log"
     }
     
-    def csvPath = config.CSVpath
+    def String csvPath = config.CSVpath
     if ( fileExists(csvPath) == false ) {
         sh 'echo "runTestFromCsv:\tException: No file named ${csvPath}." > ${logPath}'
         return false
     }
-    def csvContent = readFile csvPath
-    def csvLines = csvContent.readLines()
-
+    def String csvContent = readFile csvPath
+    def String csvLines = csvContent.readLines()
+    def String commandToRun = ""
+    
     for (def line in csvLines) {
         def fields = line.split(',')
         //Fail safe for too small CSV line
         if (fields.size() < 4)
             continue
-        def commandToRun = fields[1]
-        
-        if (fields[1] != "" && fields[1][0] == '.' && fields[1][1] == '/') {//if cmd is a path to a script
+        commandToRun = fields[1]
+        //if CommandToRun is a path to a bash script (starts with ./)
+        if (commandToRun != "" && commandToRun[0] == '.' && commandToRun[1][1] == '/') {
             loadScript(
                 newSciptName: "tmp.sh",
                 filePath: fields[1]
