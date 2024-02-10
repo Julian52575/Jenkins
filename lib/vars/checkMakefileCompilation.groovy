@@ -1,13 +1,14 @@
 def call(Map config = [:] ) {
-    hasCompiled = 0
-
+    def int hasCompiled = 0
+    def boolean hasMakefile = false
+    
     sh "echo -n '*Compilation: \t' >> ${config.logName}"
     //TEST MAKEFILE
-    def hasMakefile = sh (
+    hasMakefile = sh (
         script: 'test Makefile',
         returnStatus: true
-    )
-    if ( hasMakefile != 0 ) {
+    ) == 0
+    if ( hasMakefile == false ) {
         printKO(
             logName: "${config.logName}"
         )
@@ -47,6 +48,5 @@ def call(Map config = [:] ) {
     printOK(
          logName: "${config.logName}"
    )
-    sh "echo '${config.name} has been compiled succesfully!' >> ${config.logName}"
     return 0
 }
