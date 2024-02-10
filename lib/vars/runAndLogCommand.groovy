@@ -25,6 +25,7 @@ logWrongOutput(Map config = [:]) {
 //
 
 def logKO(Map config = [:]) {
+    echo "Logging KO\n"
     writeFile (
         file: config.logPath,
         text: ">> ${config.cmd}:KO\n"
@@ -49,6 +50,7 @@ def logKO(Map config = [:]) {
     )
 }
 def logOK(Map config = [:]) {
+    echo "Logging OKay\n"
     writeFile (
         file: config.logPath,
         text: ">> ${config.cmd}:OK\n"
