@@ -1,6 +1,6 @@
 //    config.cmd    ->    command to run as a string
 @NonCPS
-def executeCmdFromString(Map config = [:]) {
+def call(Map config = [:]) {
     def String stdOutput = ""
     def int status = 0
     def process = null
