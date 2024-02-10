@@ -41,9 +41,9 @@ def call(Map config = [:] ) {
         sh "echo 'Compilation failed with status non 0.' >> ${logPath}"
         return false
     }
-    //TEST -X 
-    isExecutable = sh (
-        script: "test -x ${config.name}",
+    /*TEST -X 
+    /isExecutable = sh (
+        script: "test -x ${binaryName}",
         returnStatus: true
     ) == 0
     if ( isExecutable == false ) {
@@ -52,7 +52,7 @@ def call(Map config = [:] ) {
         )
         sh "echo '${binaryName}' >> ${logPath}"
         return false
-    }
+    }*/
     //LOGGING
     printOK(
          logName: "${logPath}"
