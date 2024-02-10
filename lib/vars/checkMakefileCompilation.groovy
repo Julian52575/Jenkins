@@ -21,7 +21,7 @@ def call(Map config = [:] ) {
         printKO(
             logName: logPath
         )
-        sh "echo 'No Makefile are present in the workspace.' >> ${logPath}"
+        sh "echo 'KO. No Makefile are present in the workspace.' >> ${logPath}"
         return false
     }
     //MAKE
@@ -41,7 +41,7 @@ def call(Map config = [:] ) {
         printKO(
             logName: logPath
         )
-        sh "echo 'Compilation failed with status non 0.' >> ${logPath}"
+        sh "echo 'KO. Compilation failed with status non 0.' >> ${logPath}"
         return false
     }
     /*TEST -X 
@@ -56,9 +56,6 @@ def call(Map config = [:] ) {
         sh "echo '${binaryName}' >> ${logPath}"
         return false
     }*/
-    //LOGGING
-    printOK(
-         logName: "${logPath}"
-   )
+    sh "echo 'OK.' >> ${logPath}"
     return true
 }
