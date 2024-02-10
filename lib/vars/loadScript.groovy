@@ -4,15 +4,15 @@
 
 //bool
 def call(Map config = [:]) {
-    def fileContent = ""
-    def fileName = config.name
-    def filePath = config.path
+    def String fileContent = ""
+    def String fileName = config.newSciptName
+    def String filePath = config.filePath
 
-    if ( config.name == "" ) {
-        sh "echo "Library Warning:\t loadScript called without proper config.name, skipping..."
+    if ( fileName == null ) {
+        sh "echo 'Library Warning:\t loadScript called without proper config.name, skipping...' "
         return false
     }
-    if ( config.path == "" )
+    if ( filePath == null )
         filePath = fileName
     
     fileContent = libraryResource filePath
