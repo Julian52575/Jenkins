@@ -26,12 +26,14 @@ def call(Map config = [:]) {
     for (def line in csvLines) {
         def fields = line.split(',')
         //Fail safe for too small CSV line
-        if (fields.size() < 4)
+        if (fields.size() < 3)
             continue
         commandToRun = fields[1]
+        if (commandToRun == "")
+            continue
         echo "\tRunning ${commandToRun}"//////////////////////////////////////
         //if CommandToRun is a path to a bash script (starts with ./)
-        if (commandToRun != "" && commandToRun[0] == '.' && commandToRun[1][1] == '/') {
+        if (commandToRun.contains("bash") == true) {
             loadScript(
                 newSciptName: "tmp.sh",
                 filePath: fields[1]
@@ -40,7 +42,7 @@ def call(Map config = [:]) {
         }
         
         if ( fields[0] != "name" && fields[1] != "cmd") { //skip csv header
-            runAndLogCommand.groovy(
+            runAndLogCommand(
                 cmd: commandToRun,
                 expOutput: fields[2],
                 expReturnValue: fields[3] as Integer,
