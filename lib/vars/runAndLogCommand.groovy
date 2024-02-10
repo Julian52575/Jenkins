@@ -23,9 +23,8 @@ logWrongOutput() {
 //    stdOutput    ->    Output that was produced by the command
 //    
 //
-logKO() {
-    //String logPath, String cmd, boolean outputResult, String expOutput, String stdOutput,
-    //                              boolean statusResult, int expStatus, int status)             {
+logKO(String logPath, String cmd, boolean outputResult, String expOutput, String stdOutput,
+                                  boolean statusResult, int expStatus, int status)             {
     echo "Logging KO\n"
     writeFile (
         file: logPath,
@@ -42,8 +41,7 @@ logKO() {
         text: "       v('_'v)\n\n"
     )
 }
-logOK() {
-    //String logPath, String cmd) {
+logOK(String logPath, String cmd) {
     echo "Logging OKay\n"
     writeFile (
         file: logPath,
