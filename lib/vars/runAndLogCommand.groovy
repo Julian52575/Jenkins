@@ -55,7 +55,7 @@ def logOK(Map config = [:]) {
     )
     writeFile (
         file: config.logPath,
-        text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\"
+        text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\n"
     )
 }
 
