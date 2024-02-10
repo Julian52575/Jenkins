@@ -49,7 +49,7 @@ def call(Map config = [:] ) {
         printKO(
           logName: "${logPath}"
         )
-        sh "echo "${binaryName} >> ${logPath}"
+        sh "echo '${binaryName}' >> ${logPath}"
         return false
     }
     //LOGGING
