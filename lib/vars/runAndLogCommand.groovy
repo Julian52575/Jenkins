@@ -4,7 +4,61 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-@NonCPS //is needed ?
+def logWrongStatus(Map config = [:]) {
+    writeFile (
+        file: config.logPath,
+        text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
+    )
+}
+def logWrongOutput(Map config = [:]) {
+    writeFile (
+        file: config.logPath,
+        text: "Expected output in stdout:\n${config.expOutput}\nBut got:\n${config.stdOutput}.\n"
+    )
+}
+
+//    config.logPath ->    log file to write into
+//    config.cmd     ->     command that was ran
+//    config.expOutput    ->    expected Output
+//    config.stdOutput    ->    Output that was produced by the command
+//    
+//
+
+def logKO(Map config = [:]) {
+    writeFile (
+        file: config.logPath,
+        text: ">> ${config.cmd}:KO\n"
+    )
+    if ( config.outputResult == false ) {
+        logWrongOutput(
+            logPath = config.logPath,
+            expOutput = config.expOutput,
+            stdOutput = config.stdOutput
+        )
+    }
+    if ( config.statusResult == false ) {
+        logWrongStatus(
+            logPath = config.logPath,
+            expStatus = config.expStatus,
+            status = config.status,
+    }
+    writeFile (
+        file: config.logPath,
+        text: "       v('_'v)\n\n"
+    )
+}
+def logOK(Map config = [:]) {
+    writeFile (
+        file: config.logPath,
+        text: ">> ${config.cmd}:OK\n"
+    )
+    writeFile (
+        file: config.logPath,
+        text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\"
+    )
+}
+
+@NonCPS
 def call(Map config = [:]) {
     def String commandToRun = config.cmd
     if ( commandToRun == null )
@@ -16,31 +70,19 @@ def call(Map config = [:]) {
     def String logPath = config.logPath
         if ( logPath == null )
             logPath = "Result.log"
-    def int status = 0 //COmes from java stuff, no cast to sh compatible
+    def int status = 0
     def String stdOutput = ""
     def process = null
     
-    //Run command thanks to java.lang.Process (fuck the documentation tho)
+    //Run command thanks to java.lang.Process (f*ck the documentation tho)
     try {
         process = commandToRun.execute()
 
-        def bob = process.isAlive()
-        if ( bob == true ) {
-            echo "${commandToRun}:\tProcess still running."
-        } else {
-            echo "${commandToRun}:\tProcess stoped."
+        if ( process.isAlive() ) {
+            process.waitFor()
         }
-
-        process.waitFor()
-        echo "${commandToRun}:\twaitFor successful."
-        
         status = process.exitValue()
-        echo "${commandToRun}:\tExit value successful."
-        echo "Exit value:\t${status}."
-        
         stdOutput = process.getText().trim()
-        echo "${commandToRun}:\tText succesful."
-        echo "Get Text:\t${stdOutput}."
 
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
@@ -58,52 +100,23 @@ def call(Map config = [:]) {
         statusResult = true
     }
 
-    echo "Before write in ${logPath}." //////////String
-    script {
-        writeFile(file: "filename.txt", text: "áéíóú", encoding: "UTF-8") //////////
-        writeFile (
-            file: "lol.txt",
-            text: 'lol\n'
-        )
-        /*
-        writeFile (
-            file: logPath,
-            text: ">> "
-        )
-        writeFile (
-            file: logPath,
-            text: ">> ${commandToRun}:\t\t"
-        )
-        */
-    }
-    echo "After write" ////////////
     echo "Starting comparison and logging."
     if ( statusResult == true && outputResult == true ) {
-        writeFile (
-            file: logPath,
-            text: "OK.\n"
+        logOK(
+            logPath = logPath
+            cmd = commandToRun
         )
     } else {
-            writeFile (
-                file: logPath,
-                text: "KO"
-            )
-        if ( outputResult == false ) {
-            writeFile (
-                file: logPath,
-                text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
-            )
-        }
-        if ( statusResult == false ) {
-            writeFile (
-                file: logPath,
-                text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
-            )
-        }
+        logKO(
+            logPath = logPath,
+            cmd = commandToRun,
+            outputResult = outputResult,
+            expOutput = expOutput,
+            stdOutput = stdOutput,
+            statusResult = statusResult,
+            expStatus = config.expStatus,
+            status = config.status
+        )
     }
-    writeFile (
-            file: logPath,
-            text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)"
-    )
     return 0
 }
