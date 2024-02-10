@@ -33,7 +33,10 @@ def call(Map config = [:] ) {
         script: 'make || true',
         returnStdout: true
     )
-    sh "echo '>> make\n${compilationLog}' >> ${logPath}"
+    if (compilationLog.contains("Warning") == true) {
+        sh "echo 'KO. Compiled with Warnings.\n${compilationLog}' > ${logPath}"
+        return false
+    }
     if ( hasCompiled == false ) {
         printKO(
             logName: logPath
