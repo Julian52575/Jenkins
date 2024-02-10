@@ -1,9 +1,16 @@
 def call(Map config = [:] ) {
-    def boolean hasCompiled = 0
+    def boolean hasCompiled = false
     def boolean hasMakefile = false
+    def boolean isExecutable = false
     def String compilationLog = ""
+    def String logPath = config.logPath
+    if (logPath == "")
+        logPath = "Result.log"
+    def String binaryName = config.binaryName
+    if (binaryName == "")
+        return false
     
-    sh "echo -n '*Compilation: \t' >> ${config.logName}"
+    sh "echo -n '*Compilation: \t' >> ${logPath}"
     //TEST MAKEFILE
     hasMakefile = sh (
         script: 'test Makefile',
@@ -13,8 +20,8 @@ def call(Map config = [:] ) {
         printKO(
             logName: "${config.logName}"
         )
-        sh "echo 'You don\'t even have a Makefile ??' >> ${config.logName}"
-        return 84
+        sh "echo 'No Makefile are present in the workspace.' >> ${logPath}"
+        return false
     }
     //MAKE
     hasCompiled = sh (
@@ -25,29 +32,29 @@ def call(Map config = [:] ) {
         script: 'make || true',
         returnStdout: true
     )
-    sh "echo '>>make\n${compilationLog}\n' >> ${config.depthName}"
+    sh "echo '>> make\n${compilationLog}' >> ${logPath}"
     if ( hasCompiled == false ) {
         printKO(
-            logName: "${config.logName}"
+            logName: logPath
         )
-        sh "echo 'Compilation failed with status ${hasCompiled}:' >> ${config.logName}"
-        return 84
+        sh "echo 'Compilation failed with status ${hasCompiled}:' >> ${logPath}"
+        return false
     }
     //TEST -X 
-    //def isExecutable = sh (
-    //    script: "test -x ${config.name}",
-    //    returnStatus: true
-    //)
-    //if ( isExecutable != 0 ) {
-    //    printKO(
-    //      logName: "${config.logName}"
-    //    )
-    //    sh "echo 'File or Execute bit missing (for real ?).' >> ${config.logName}"
-    //    return 84
-    //}
+    isExecutable = sh (
+        script: "test -x ${config.name}",
+        returnStatus: true
+    ) == 0
+    if ( isExecutable != 0 ) {
+        printKO(
+          logName: "${logPath}"
+        )
+        sh "echo "${binaryName} >> ${logPath}"
+        return false
+    }
     //LOGGING
     printOK(
-         logName: "${config.logName}"
+         logName: "${logPath}"
    )
-    return 0
+    return true
 }
