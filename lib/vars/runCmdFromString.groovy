@@ -6,7 +6,7 @@ def call(Map config = [:]) {
     def process = null
 
     if ( config.cmd == null )
-        return ["", 0]
+        return [null, 0]
     try {
         //Run command thanks to java.lang.Process (f*ck the documentation tho)
         process = config.cmd.execute()
