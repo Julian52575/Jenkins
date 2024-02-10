@@ -19,7 +19,7 @@ def call(Map config = [:]) {
         return false
     }
     def String csvContent = readFile csvPath
-    def String csvLines = csvContent.readLines()
+    def csvLines = csvContent.readLines()
     def String commandToRun = ""
     
     echo "\tBefore for loop with _${csvPath}_"///////////////////////////////
