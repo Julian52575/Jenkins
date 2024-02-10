@@ -1,5 +1,5 @@
 def call(Map config = [:] ) {
-    def int hasCompiled = 0
+    def boolean hasCompiled = 0
     def boolean hasMakefile = false
     def String compilationLog = ""
     
