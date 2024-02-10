@@ -17,8 +17,15 @@ def call(Map config = [:]) {
             logPath = "Result.log"
     def int status = 0
     def String stdOutput = ""
+    def String logContent = ""
     def process = null
+
+    //reading log file
+    if ( fileExists(logPath) ) {
+        logContent = readFile logPath
+    }
     
+    //Running cmd
     try {
         def list = runCmdFromString(
             cmd = commandToRun
@@ -41,39 +48,24 @@ def call(Map config = [:]) {
     }
 
     echo "Starting comparison and logging.\n"
+    //implement 'readFile fileName' into a single variable that will be appended Then written at the end
     if ( statusResult == true && outputResult == true ) {
-        echo "Logging OKay\n"
-        writeFile (
-            file: logPath,
-            text: ">> ${commandToRun}:OK\n"
-        )
-        writeFile (
-            file: logPath,
-            text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\n"
-        )
-        
+        logContent = logContent + ">> ${commandToRun}:OK\n" + "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\n"
+
     } else {
         echo "Logging KO\n"
-        writeFile (
-            file: logPath,
-            text: ">> ${commandToRun}:KO\n"
-        )
+        logContent = logContent + ">> ${commandToRun}:KO\n"
         if ( outputResult == false ) {
-            writeFile (
-                file: logPath,
-                text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
-            )
+            logContent = logContent + "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
         }
         if ( statusResult == false ) {
-            writeFile (
-                file: logPath,
-                text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
-            )
+            logContent = logContent + "Expected return status:\n${expStatus}\nBut got:\n${status}.\n" 
         }
-        writeFile (
-            file: logPath,
-            text: "       v('_'v)\n\n"
-        )
+        logContent = logContent + "       v('_'v)\n\n"
     }
+    writeFile (
+        file: logPath,
+        text: logContent
+    )
     return 0
 }
