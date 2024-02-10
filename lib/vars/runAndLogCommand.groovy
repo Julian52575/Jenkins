@@ -27,13 +27,14 @@ def call(Map config = [:]) {
     
     //Running cmd
     try {
-        def list[2] = runCmdFromString(
+        def list = runCmdFromString(
             cmd = commandToRun
         )
         echo "List of result from ${commandToRun} is length _${list.length()}_. [0] = _${list[0]}_."
         stdOutput = list.get(0)
         status = list.get(1)
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
     
