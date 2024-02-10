@@ -1,7 +1,7 @@
 def call(Map config = [:]) {
     hasCompiled = 0
 
-    hasCompiled = checkCompilation( 
+    hasCompiled = checkMakefileCompilation( 
                     name:"${config.name}",
                     logName: "${config.logName}",
                     depthName: "${config.depthName}"
