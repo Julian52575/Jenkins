@@ -1,5 +1,4 @@
 def call(Map config = [:]) {
-    def int hasCompiled = 0
     def String mergedText = ""
     def String chinaWall = ""
     def String strlen = ""
@@ -13,6 +12,7 @@ def call(Map config = [:]) {
                 script: 'echo -n "${mergedText}" | wc -c',
                 returnStdout: true
             )
+    echo "Strlen: _${strlen}_"
     chinaWall = sh (
                     script: " printf %${strlen}s | tr ' ' '-' ",
                     returnStdout: true
