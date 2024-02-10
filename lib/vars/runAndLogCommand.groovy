@@ -115,8 +115,8 @@ def call(Map config = [:]) {
             expOutput = expOutput,
             stdOutput = stdOutput,
             statusResult = statusResult,
-            expStatus = config.expStatus,
-            status = config.status
+            expStatus = expStatus,
+            status = status
         )
     }
     return 0
