@@ -12,14 +12,14 @@ def call(Map config = [:]) {
     strlen = sh (
                 script: 'echo -n "${mergedText}" | wc -c',
                 returnStdout: true
-            ).trim()
+            )
     chinaWall = sh (
-                    script: " printf %${strlen}s |tr ' ' '-' ",
+                    script: " printf %${strlen}s | tr ' ' '-' ",
                     returnStdout: true
                 )
 
     //Prints Header
-    sh "echo '${mergedText}' > ${config.logName}"
+    sh "echo '${mergedText}' >> ${config.logName}"
     sh "echo '${chinaWall}' >> ${config.logName}"
     sh "echo ' ' >> ${config.logName}"
 }
