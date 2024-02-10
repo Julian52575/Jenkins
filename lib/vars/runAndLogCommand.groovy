@@ -93,12 +93,12 @@ def call(Map config = [:]) {
 
     echo "Starting comparison and logging.\n"
     if ( statusResult == true && outputResult == true ) {
-        logOK(
+        runAndLogCommand.logOK(
             logPath = logPath,
             cmd = commandToRun
         )
     } else {
-        logKO(
+        runAndLogCommand.logKO(
             logPath = logPath,
             cmd = commandToRun,
             outputResult = outputResult,
