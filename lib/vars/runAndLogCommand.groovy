@@ -92,18 +92,18 @@ def call(Map config = [:]) {
     }
     process.destroy()
     
-    echo "Testing expOutput."
+    echo "Testing expOutput.\n"
     def boolean outputResult = false
     if ( stdOutput == expOutput ) {
         outputResult = true
     }
-    echo "Testing expStatus."
+    echo "Testing expStatus.\n"
     def boolean statusResult = false
     if ( status == expStatus ) {
         statusResult = true
     }
 
-    echo "Starting comparison and logging."
+    echo "Starting comparison and logging.\n"
     if ( statusResult == true && outputResult == true ) {
         logOK(
             logPath = logPath,
