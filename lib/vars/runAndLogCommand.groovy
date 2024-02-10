@@ -4,59 +4,51 @@
 // config.logPath -> logFile to write result into (if any)
 // config.errorPath -> file to log errors into
 
-def logWrongStatus(Map config = [:]) {
+logWrongStatus(String logPath, int expStatus, int status) {
     writeFile (
-        file: config.logPath,
+        file: logPath,
         text: "Expected return status:\n${expStatus}\nBut got:\n${status}.\n"
     )
 }
-def logWrongOutput(Map config = [:]) {
+logWrongOutput(String logPath, String expOutput, String stdOutput) {
     writeFile (
-        file: config.logPath,
-        text: "Expected output in stdout:\n${config.expOutput}\nBut got:\n${config.stdOutput}.\n"
+        file: logPath,
+        text: "Expected output in stdout:\n${expOutput}\nBut got:\n${stdOutput}.\n"
     )
 }
 
-//    config.logPath ->    log file to write into
-//    config.cmd     ->     command that was ran
-//    config.expOutput    ->    expected Output
-//    config.stdOutput    ->    Output that was produced by the command
+//    logPath ->    log file to write into
+//    cmd     ->     command that was ran
+//    expOutput    ->    expected Output
+//    stdOutput    ->    Output that was produced by the command
 //    
 //
-
-def logKO(Map config = [:]) {
+logKO(String logPath, String cmd, boolean outputResult, String expOutput, String stdOutput,
+                                  boolean statusResult, int expStatus, int status)             {
     echo "Logging KO\n"
     writeFile (
-        file: config.logPath,
-        text: ">> ${config.cmd}:KO\n"
+        file: logPath,
+        text: ">> ${cmd}:KO\n"
     )
     if ( config.outputResult == false ) {
-        logWrongOutput(
-            logPath = config.logPath,
-            expOutput = config.expOutput,
-            stdOutput = config.stdOutput
-        )
+        logWrongOutput(logPath, expOutput, stdOutput)
     }
     if ( config.statusResult == false ) {
-        logWrongStatus(
-            logPath = config.logPath,
-            expStatus = config.expStatus,
-            status = config.status
-        )
+        logWrongStatus(logPath, expStatus, status)
     }
     writeFile (
-        file: config.logPath,
+        file: logPath,
         text: "       v('_'v)\n\n"
     )
 }
-def logOK(Map config = [:]) {
+logOK(String logPath, String cmd) {
     echo "Logging OKay\n"
     writeFile (
-        file: config.logPath,
-        text: ">> ${config.cmd}:OK\n"
+        file: logPath,
+        text: ">> ${cmd}:OK\n"
     )
     writeFile (
-        file: config.logPath,
+        file: logPath,
         text: "(^'o')^  ^('o'^)  ^('o'^)^('o'^)\n\n"
     )
 }
