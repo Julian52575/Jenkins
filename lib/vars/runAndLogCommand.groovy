@@ -27,7 +27,7 @@ def call(Map config = [:]) {
     
     //Running cmd
     try {
-        def list = runCmdFromString(
+        def list[2] = runCmdFromString(
             cmd = commandToRun
         )
         stdOutput = list[0]
