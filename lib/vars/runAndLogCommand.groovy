@@ -40,7 +40,8 @@ def logKO(Map config = [:]) {
         logWrongStatus(
             logPath = config.logPath,
             expStatus = config.expStatus,
-            status = config.status,
+            status = config.status
+        )
     }
     writeFile (
         file: config.logPath,
