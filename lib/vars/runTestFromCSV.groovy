@@ -30,8 +30,8 @@ def call(Map config = [:]) {
         
         if (fields[1] != "" && fields[1][0] == '.' && fields[1][1] == '/') {//if cmd is a path to a script
             loadScript(
-                name: "tmp.sh",
-                path: fields[1]
+                newSciptName: "tmp.sh",
+                filePath: fields[1]
             )
             commandToRun = "bash tmp.sh"
         }
