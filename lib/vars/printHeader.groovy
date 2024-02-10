@@ -7,7 +7,7 @@ def call(Map config = [:]) {
         script: "date '+%A %d %B - %H:%M' | tr -d '\n'",
         returnStdout: true
     )
-    mergedText = "| " + config.name + '|' + author + '|' + currentTime + " |"
+    mergedText = "| " + config.name + " | " + author + " | " + currentTime + " |"
     strlen = sh (
                 script: "echo -n '1${mergedText}' | wc -c",
                 returnStdout: true
