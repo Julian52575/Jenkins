@@ -26,8 +26,10 @@ def call(Map config = [:]) {
     for (def line in csvLines) {
         def fields = line.split(',')
         //Fail safe for too small CSV line
-        if (fields.size() < 3)
+        if (fields.size() < 3) {
+            echo "Looping back due to size _${fields.size()}_ < 3"
             continue
+        }
         commandToRun = fields[1]
         if (commandToRun == "")
             continue
