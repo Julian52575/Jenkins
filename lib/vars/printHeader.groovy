@@ -1,4 +1,7 @@
 def call(Map config = [:]) {
+    def String logPath = config.logPath
+    if (logPath == null)
+        logPath = "Result.log"
     def String mergedText = ""
     def String chinaWall = ""
     def String strlen = ""
@@ -19,7 +22,7 @@ def call(Map config = [:]) {
                 ) + "@"
 
     //Prints Header
-    sh "echo '${chinaWall}' >> ${config.logName}"
-    sh "echo '${mergedText}' >> ${config.logName}"
-    sh "echo '${chinaWall}' >> ${config.logName}"
+    sh "echo '${chinaWall}' >> ${logPath}"
+    sh "echo '${mergedText}' >> ${logPath}"
+    sh "echo '${chinaWall}' >> ${logPath}"
 }
