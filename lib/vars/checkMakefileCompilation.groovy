@@ -5,10 +5,10 @@ def call(Map config = [:] ) {
     def String boolStrBuffer = "0"
     def String compilationLog = ""
     def String logPath = config.logPath
-    if (logPath == "")
+    if (logPath == null)
         logPath = "Result.log"
     def String binaryName = config.binaryName
-    if (binaryName == "")
+    if (binaryName == null)
         return false
     
     sh "echo -n '*Compilation: \t' >> ${logPath}"
