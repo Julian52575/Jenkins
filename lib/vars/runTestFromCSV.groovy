@@ -8,10 +8,15 @@
     //CSVpath -> ./NMtests.csv
 
 def call(Map config = [:]) {
-    def csvPath = config.CSVpath
+    def logName = config.logName
+    if (logName == "") {
+        logName = "Result.log"
+    }
     
-    if ( fileExists("${config.CSVpath}") == false ) {
-        sh "echo No CSV file for testing called _${config.CSVpath}_"
+    def csvPath = config.CSVpath
+    if ( fileExists(csvPath) == false ) {
+        echo "runTestFromCsv:\tException: No file named ${csvPath}."
+        throw Exception e
         return false
     }
     def csvContent = readFile "${config.CSVname}"
@@ -30,14 +35,15 @@ def call(Map config = [:]) {
         }
         
         if ( fields[0] != "name" && fields[1] != "cmd") { //skip csv header
-            runTest(
-                name: fields[0],
-                cmd: fields[1],
+            runAndLogCommand.groovy(
+                cmd: commandToRun,
                 expOutput: fields[2],
                 expReturnValue: fields[3] as Integer,
-                logName: "${config.logName}",
-                depthName: "${config.depthName}"
+                logName: config.logName,
             )
+        }
+        if (commandToRun == "bash tmp.sh") {
+            sh 'rm tmp.sh'
         }
     }
     return true
