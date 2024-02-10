@@ -9,7 +9,7 @@ def call(Map config = [:]) {
     )
     mergedText = "| " + config.name + '|' + author + '|' + currentTime + " |"
     strlen = sh (
-                script: "echo -n '12${mergedText}' | wc -c",
+                script: "echo -n '1${mergedText}' | wc -c",
                 returnStdout: true
             ).trim()
     echo "mergedText: _${mergedText}_. Strlen: _${strlen}_"
