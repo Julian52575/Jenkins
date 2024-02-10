@@ -19,7 +19,7 @@ def call(Map config = [:] ) {
     ) == 0
     if ( hasMakefile == false ) {
         printKO(
-            logName: "${config.logName}"
+            logName: logPath
         )
         sh "echo 'No Makefile are present in the workspace.' >> ${logPath}"
         return false
