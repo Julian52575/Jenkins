@@ -2,6 +2,7 @@ def call(Map config = [:] ) {
     def boolean hasCompiled = false
     def boolean hasMakefile = false
     def boolean isExecutable = false
+    def String boolStrBuffer = "0"
     def String compilationLog = ""
     def String logPath = config.logPath
     if (logPath == "")
@@ -37,7 +38,7 @@ def call(Map config = [:] ) {
         printKO(
             logName: logPath
         )
-        sh "echo 'Compilation failed with status ${hasCompiled}:' >> ${logPath}"
+        sh "echo 'Compilation failed with status non 0.' >> ${logPath}"
         return false
     }
     //TEST -X 
@@ -45,9 +46,9 @@ def call(Map config = [:] ) {
         script: "test -x ${config.name}",
         returnStatus: true
     ) == 0
-    if ( isExecutable != 0 ) {
+    if ( isExecutable == false ) {
         printKO(
-          logName: "${logPath}"
+          logName: logPath
         )
         sh "echo '${binaryName}' >> ${logPath}"
         return false
