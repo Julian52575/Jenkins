@@ -26,8 +26,8 @@ def call(Map config = [:]) {
     for (def line in csvLines) {
         def fields = line.split(',')
         //Fail safe for too small CSV line
-        if (fields.size() < 3)
-            continue
+        //if (fields.size() < 3)
+            //continue
         commandToRun = fields[1]
         echo "\tRunning ${commandToRun}"//////////////////////////////////////
         //if CommandToRun is a path to a bash script (starts with ./)
