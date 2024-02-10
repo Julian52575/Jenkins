@@ -12,7 +12,7 @@ def call(Map config = [:]) {
     strlen = sh (
                 script: 'echo -n "${mergedText}" | wc -c',
                 returnStdout: true
-            ).trim("\n")
+            ).trim()
     chinaWall = sh (
                     script: " printf %${strlen}s |tr ' ' '-' ",
                     returnStdout: true
