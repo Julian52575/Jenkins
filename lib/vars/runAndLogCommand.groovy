@@ -30,7 +30,7 @@ def call(Map config = [:]) {
         def list[2] = runCmdFromString(
             cmd = commandToRun
         )
-        list.every()
+        echo "List of result from ${commandToRun} is length _${list.length()}_. [0] = _${list[0]}_."
         stdOutput = list.get(0)
         status = list.get(1)
     } catch (Exception e) {
