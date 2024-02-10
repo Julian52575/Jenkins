@@ -11,8 +11,7 @@ def call(Map config = [:]) {
     for (def line in csvLines) {
         def fields = line.split(',')
 
-        if (fields.empty() == true)
-            continue
+        echo "Test from runSetupCSV"///////////////////
         if ( fields[0] != "cmd" ) { //skip CSV header
             sh (
                 script: "${fields[0]}",
