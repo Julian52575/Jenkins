@@ -18,7 +18,7 @@ def call(Map config = [:]) {
         sh 'echo "runTestFromCsv:\tException: No file named ${csvPath}." > ${logPath}'
         return false
     }
-    def csvContent = readFile "${config.CSVname}"
+    def csvContent = readFile csvPath
     def csvLines = csvContent.readLines()
 
     for (def line in csvLines) {
