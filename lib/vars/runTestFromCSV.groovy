@@ -23,10 +23,9 @@ def call(Map config = [:]) {
 
     for (def line in csvLines) {
         def fields = line.split(',')
-        def commandToRun = fields[1]
-
         if (fields.length() < 4)
             continue
+        def commandToRun = fields[1]
         
         if (fields[1] != "" && fields[1][0] == '.' && fields[1][1] == '/') {//if cmd is a path to a script
             loadScript(
