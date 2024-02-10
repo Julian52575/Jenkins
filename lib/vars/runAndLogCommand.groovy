@@ -104,7 +104,7 @@ def call(Map config = [:]) {
     echo "Starting comparison and logging."
     if ( statusResult == true && outputResult == true ) {
         logOK(
-            logPath = logPath
+            logPath = logPath,
             cmd = commandToRun
         )
     } else {
