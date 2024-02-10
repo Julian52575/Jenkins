@@ -16,7 +16,6 @@ def call(Map config = [:]) {
     def csvPath = config.CSVpath
     if ( fileExists(csvPath) == false ) {
         echo "runTestFromCsv:\tException: No file named ${csvPath}."
-        throw Exception e
         return false
     }
     def csvContent = readFile "${config.CSVname}"
@@ -45,6 +44,7 @@ def call(Map config = [:]) {
         if (commandToRun == "bash tmp.sh") {
             sh 'rm tmp.sh'
         }
+        return true
     }
     return true
 }
