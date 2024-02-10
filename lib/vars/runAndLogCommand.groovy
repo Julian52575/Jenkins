@@ -79,17 +79,22 @@ def call(Map config = [:]) {
     
     //Run command thanks to java.lang.Process (f*ck the documentation tho)
     try {
+        echo "1\n"
         process = commandToRun.execute()
 
+        echo "2\n"
         if ( process.isAlive() ) {
             process.waitFor()
         }
+        echo "3\n"
         status = process.exitValue()
+        echo "4\n"
         stdOutput = process.getText().trim()
 
     } catch (Exception e) {
         echo "!!! Exception: ${e.message}"
     }
+    echo "5\n"
     process.destroy()
     
     echo "Testing expOutput.\n"
