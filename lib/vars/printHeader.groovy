@@ -7,18 +7,19 @@ def call(Map config = [:]) {
         script: "date '+%A %d %B - %H:%M' | tr -d '\n'",
         returnStdout: true
     )
-    mergedText = config.name + ' | ' + author + ' | ' + currentTime + ' | '
+    mergedText = ' @ ' + config.name + ' | ' + author + ' | ' + currentTime + ' @ '
     strlen = sh (
-                script: "echo -n '${mergedText}1234' | wc -c",
+                script: "echo -n '${mergedText}12' | wc -c",
                 returnStdout: true
             ).trim()
     echo "mergedText: _${mergedText}_. Strlen: _${strlen}_"
-    chinaWall = sh (
+    chinaWall = "@" + sh (
                     script: " printf %${strlen}s | tr ' ' '-' ",
                     returnStdout: true
-                )
+                ) + "@"
 
     //Prints Header
+    sh "echo '${chinaWall}' >> ${config.logName}"
     sh "echo '${mergedText}' >> ${config.logName}"
     sh "echo '${chinaWall}' >> ${config.logName}"
     sh "echo ' ' >> ${config.logName}"
