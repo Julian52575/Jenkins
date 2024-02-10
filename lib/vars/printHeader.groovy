@@ -22,5 +22,4 @@ def call(Map config = [:]) {
     sh "echo '${chinaWall}' >> ${config.logName}"
     sh "echo '${mergedText}' >> ${config.logName}"
     sh "echo '${chinaWall}' >> ${config.logName}"
-    sh "echo ' ' >> ${config.logName}"
 }
